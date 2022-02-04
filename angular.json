@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "student-accommodation"
+    }
+  },
+  "defaultProject": "student-accommodation",
+  "cli": {
+    "analytics": "3a4fc970-fc73-40cf-9515-80a431f073ea"
+  }
 }
