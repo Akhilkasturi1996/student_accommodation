@@ -1,0 +1,39 @@
+.login-form{
+  margin-top: 10%;
+  padding-top: 20px;
+  /*background-color: aqua;*/
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.username-label, .password-label{
+  text-align: center;
+}
+
+.login-btn{
+  text-align: center;
+}
+
+.forgot-password{
+  text-align: left;
+  font-size: small;
+}
+
+.forgot-password a{
+  font-weight: normal;
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
+.login-btn button{
+  padding: 5px 30px;
+  font-weight: bold;
+}
+
+.login-end{
+  margin-top: 5%;
+}
