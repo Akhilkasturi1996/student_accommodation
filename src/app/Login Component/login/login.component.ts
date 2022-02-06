@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl,FormBuilder,Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,17 +11,18 @@ export class LoginComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit(): void {
-
-  }
-
   LoginForm = new FormGroup({
     username: new FormControl(),
     password: new FormControl()
   });
 
+  ngOnInit(): void {
+
+  }
+
+  // tslint:disable-next-line:typedef
   onSubmit(){
-    //username and password check
+    // username and password check
   }
 
 }

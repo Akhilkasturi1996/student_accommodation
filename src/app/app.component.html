@@ -1,11 +1,10 @@
-
-<div class="form-group mt-4">
-  <h2 style="text-align: center;font-weight: bolder">Welcome to Student's Room Accommodation System</h2>
-</div>
-
-<app-login></app-login>
-
-
-
-
-<router-outlet></router-outlet>
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <!-- <mat-drawer mode="side" opened="true"> -->
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
