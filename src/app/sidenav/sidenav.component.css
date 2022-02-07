@@ -33,14 +33,18 @@
   color: #f2f5f7 !important;
 }
 .list-item-active ::ng-deep .mat-list-item-content {
-  background: #2c3344 !important;
+  background: #1e92b7 !important;
 }
 .list-item-active ::ng-deep .mat-list-item-content:hover {
-  background: #2c3344 !important;
+  background: #063970 !important;
 }
 .mat-subheader {
   color: #818cf8;
   font-size: 0.6rem;
   font-weight: 100;
   letter-spacing: 1px;
+}
+
+::ng-deep .myMenu{
+  background-color: #C8F2EF;
 }

@@ -1,16 +1,35 @@
 <mat-nav-list>
   <div class="logo py-4">
-    <img src="./assets/logo.svg" alt="Company Logo" />
+    <img src="./assets/logo.png" alt="Company Logo" />
   </div>
   <mat-divider></mat-divider>
-  <h2 matSubheader class="mt-2">APPLICATIONS</h2>
-
+<!--  <h2 matSubheader class="mt-2">APPLICATIONS</h2>-->
+<br>
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/home">
     <mat-icon>home</mat-icon> Home
   </a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard">
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard" [mat-menu-trigger-for]="dashboard">
     <mat-icon>dashboard</mat-icon> Dashboard
   </a>
+  <div class="sub-menus">
+    <mat-menu class="myMenu" #dashboard="matMenu" xPosition="before">
+      <button mat-menu-item  routerLink="/dashboard1" >
+        <mat-icon>dashboard</mat-icon> Dashboard 1
+      </button>
+      <button mat-menu-item  routerLink="/dashboard1" >
+        <mat-icon>dashboard</mat-icon> Dashboard 2
+      </button>
+      <button mat-menu-item  routerLink="/dashboard1" >
+        <mat-icon>dashboard</mat-icon> Dashboard 3
+      </button>
+    </mat-menu>
+  </div>
+
+
+
+
+
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/payment">
     <mat-icon>payment</mat-icon> Payment
   </a>
