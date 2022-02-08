@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../services/auth/authentication.service';
 
@@ -9,19 +9,16 @@ import {AuthenticationService} from '../services/auth/authentication.service';
 })
 export class HeaderComponent implements OnInit {
 
-  @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
   constructor(private router: Router, private authenticateService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
 
-  // tslint:disable-next-line:typedef
-  toggleSidebar() {
-    this.toggleSidebarForMe.emit();
-  }
 
+
+  // tslint:disable-next-line:typedef
   logout(){
-    this.authenticateService.isAuthenticate=false;
+    this.authenticateService.isAuthenticate = false;
     this.router.navigate(['login']);
   }
 

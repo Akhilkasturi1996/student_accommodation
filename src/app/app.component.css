@@ -5,6 +5,13 @@
 }
 
 mat-drawer {
+  width: 65px;
+  /*overflow: -moz-hidden-unscrollable;*/
+}
+
+
+
+mat-drawer:hover {
   width: 260px;
 }
 mat-drawer-container {
@@ -13,4 +20,23 @@ mat-drawer-container {
 
 mat-drawer {
   background: #063970;
+}
+
+.mat-icon {
+  display: none;
+  margin-top: 5px;
+  outline: none;
+  border: 0;
+  background: transparent;
+}
+
+.mat-icon mat-icon{
+  width: 50px;
+  scale: 1.5;
+}
+
+@media screen and (max-width: 750px) {
+  .mat-icon {
+    display: block;
+  }
 }

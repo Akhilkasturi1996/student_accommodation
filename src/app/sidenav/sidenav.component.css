@@ -2,13 +2,13 @@
   vertical-align: middle;
   margin-right: 1rem;
 }
+
 .logo {
   text-align: center;
   padding: 2.6rem 1rem;
+  height: 150px;
 }
-.logo img {
-  width: 200px;
-}
+
 .mat-divider {
   border-top-width: 2px;
   border-color: white;
@@ -48,3 +48,16 @@
 ::ng-deep .myMenu{
   background-color: #C8F2EF;
 }
+
+.sub-menus{
+  background-color: #00a2d2;
+}
+
+.sub-menus ::ng-deep .mat-list-item-content{
+color: white;
+}
+
+.sub-menus .list-item-active ::ng-deep .mat-list-item-content {
+  background: #05485a !important;
+}
+
