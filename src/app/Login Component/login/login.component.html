@@ -1,35 +1,57 @@
-
-<form class="login-form" [formGroup]="LoginForm" style="width: 75%" (ngSubmit)="onSubmit()">
-
-  <div class="form-group mt-3 row">
-    <div class="col-sm-6 username-label">
-              <span>
-                <label>Username</label>
-              </span>
+<div class="back-color">
+  <img class="wave" src="assets/login_cover.jpg">
+  <div class="container">
+    <div class="img">
+      <img src="assets/login_bg.svg">
     </div>
-    <div class="col-sm-4">
-      <input type="text" class="form-control input-type form-control-sm"
-             formControlName="username" name="username" placeholder="Username">
+    <div class="login-content">
+
+      <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()" novalidate>
+        <img src="assets/avatar.svg">
+        <h2 class="title">Welcome</h2>
+        <div class="input-div one">
+
+          <div class="i">
+            <img src="assets/person-circle.svg" height="30px" width="30px" style="opacity: 50%">
+          </div>
+
+          <div class="div">
+            <input placeholder="Username" type="text" class="form-control input" formControlName="uname" name="username"
+            required>
+          </div>
+        </div>
+
+        <mat-error *ngIf="(l.uname.touched || submitted) && l.uname.errors?.required ">
+          Username is Required
+        </mat-error>
+
+        <div class="input-div pass">
+          <div class="i">
+            <img src="assets/lock-fill.svg" height="30px" width="30px" style="opacity: 50%">
+          </div>
+
+          <div class="form-group">
+            <input placeholder="Password" type="password" class="form-control input" formControlName="pword"
+                   required>
+        </div>
+        </div>
+
+        <mat-error *ngIf="(l.pword.touched || submitted) && l.pword.errors?.required">
+          Password is Required
+        </mat-error>
+
+        <mat-error *ngIf="signInFalse">
+          Username or Password is Incorrect
+        </mat-error>
+
+        <a href="#">Forgot Password?</a>
+        <button type="submit" class="btn">Login</button>
+
+
+
+        <a style="text-align: center;color: #0a478b;margin-top: 3em" href="#"><b>Sign Up</b></a>
+      </form>
+
     </div>
   </div>
-  <div class="form-group mt-3 row">
-    <div class="col-sm-6 password-label">
-              <span>
-                <label>Password</label>
-              </span>
-    </div>
-    <div class="col-sm-4">
-      <input type="password" class="form-control input-type form-control-sm"
-             formControlName="password" name="password" placeholder="Password">
-    </div>
-  </div>
-
-  <div class="row login-end">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-6 forgot-password"> <a>Forgot Password?</a> </div>
-    <div class="col-sm-4 login-btn">
-      <button type="submit" class="btn btn-success" [disabled]="!LoginForm.valid">Login</button>
-    </div>
-  </div>
-
-</form>
+</div>

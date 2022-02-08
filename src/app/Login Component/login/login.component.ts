@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/auth/authentication.service';
 import {SignInData} from '../../Models/signInData';
@@ -13,29 +13,41 @@ export class LoginComponent implements OnInit {
   constructor(private authenticationservice: AuthenticationService) {
   }
 
-  get loginControl(){
-    return this.LoginForm.controls;
-  }
+  submitted = false;
+  signInFalse = false;
 
   LoginForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required])
+    uname: new FormControl('', [Validators.required]),
+    pword: new FormControl('', [Validators.required])
   });
 
-  ngOnInit(): void {
-
+  // tslint:disable-next-line:typedef
+  ngOnInit() {
   }
 
   // tslint:disable-next-line:typedef
-  onSubmit(){
+  get l() {
+    return this.LoginForm.controls;
+  }
+
+  // tslint:disable-next-line:typedef
+  onSubmit() {
+    this.submitted = true;
     // username and password check
-    console.log(this.LoginForm.value.username);
-    if (this.LoginForm.invalid){
+    console.log(this.l.uname.errors);
+    if (this.LoginForm.invalid) {
       return;
     }
 
-    const signInData = new SignInData(this.LoginForm.value.username, this.LoginForm.value.password);
+    const signInData = new SignInData(this.LoginForm.value.uname, this.LoginForm.value.pword);
     this.authenticationservice.authentcate(signInData);
+
+    if (!this.authenticationservice.authentcate(signInData)) {
+      this.signInFalse = true;
+    } else {
+      this.signInFalse = false;
+    }
   }
+
 
 }
