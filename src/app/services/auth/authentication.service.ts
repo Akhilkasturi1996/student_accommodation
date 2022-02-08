@@ -19,8 +19,7 @@ export class AuthenticationService {
     }
     else {
       this.isAuthenticate = false;
-      console.log('error');
-      return  false;
+      return false;
     }
   }
 
