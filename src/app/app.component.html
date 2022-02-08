@@ -1,9 +1,10 @@
-
-<div>
-  <h2 style="text-align: center">Welcome to Student's Accommodation System</h2>
-</div>
-
-
-
-
-<router-outlet></router-outlet>
+<mat-drawer-container>
+  <mat-drawer *ngIf="authenticateservice.isAuthenticate" mode="side" [opened]="sideBarOpen">
+    <!-- <mat-drawer mode="side" opened="true"> -->
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-header *ngIf="authenticateservice.isAuthenticate" (toggleSidebarForMe)="sideBarToggler()"></app-header>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

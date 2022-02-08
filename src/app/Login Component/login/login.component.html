@@ -1,0 +1,35 @@
+
+<form class="login-form" [formGroup]="LoginForm" style="width: 75%" (ngSubmit)="onSubmit()">
+
+  <div class="form-group mt-3 row">
+    <div class="col-sm-6 username-label">
+              <span>
+                <label>Username</label>
+              </span>
+    </div>
+    <div class="col-sm-4">
+      <input type="text" class="form-control input-type form-control-sm"
+             formControlName="username" name="username" placeholder="Username">
+    </div>
+  </div>
+  <div class="form-group mt-3 row">
+    <div class="col-sm-6 password-label">
+              <span>
+                <label>Password</label>
+              </span>
+    </div>
+    <div class="col-sm-4">
+      <input type="password" class="form-control input-type form-control-sm"
+             formControlName="password" name="password" placeholder="Password">
+    </div>
+  </div>
+
+  <div class="row login-end">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-6 forgot-password"> <a>Forgot Password?</a> </div>
+    <div class="col-sm-4 login-btn">
+      <button type="submit" class="btn btn-success" [disabled]="!LoginForm.valid">Login</button>
+    </div>
+  </div>
+
+</form>
