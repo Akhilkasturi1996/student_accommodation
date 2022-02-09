@@ -19,6 +19,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {RegistrationComponent} from './registration/registration.component';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     HomeComponent,
     HeaderComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    RegistrationComponent
 
   ],
   imports: [
@@ -36,6 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    CommonModule,
     // material
     MatSidenavModule,
     MatToolbarModule,

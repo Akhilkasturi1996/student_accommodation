@@ -1,0 +1,56 @@
+.container{
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 10px;
+  /*box-shadow: 10px 10px 5px grey;*/
+  background-color: #f2f2f2;
+}
+
+.main{
+  margin-left: 20%;
+}
+
+h1{
+  text-align: center;
+  font-weight: 600;
+  font-size: 2.5em;
+  color: black;
+  padding-top: 10px;
+}
+
+label{
+  font-size: large;
+  font-weight: bold;
+}
+
+input, textarea, select {
+  font-size: large;
+  background-color: whitesmoke;
+}
+
+input[type=text],input[type=password]{
+  border: none;
+  border-bottom: 2px solid #94a3b8;
+}
+
+.background-color{
+  position: fixed;
+  background-color: white;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -5;
+}
+
+@media screen and (max-width: 1250px) {
+  .main{
+    margin-left: 10%;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .main{
+   margin-left: auto;
+   margin-right: auto;
+  }
+}
