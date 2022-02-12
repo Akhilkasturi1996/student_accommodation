@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
   submitted = false;
   signInFalse = false;
+  signInError = '';
 
   LoginForm = new FormGroup({
     uname: new FormControl('', [Validators.required]),
@@ -55,6 +56,7 @@ export class LoginComponent implements OnInit {
                 console.log(res);
               } else {
                 this.authenticationservice.isAuthenticate = false;
+                this.signInError= res['message'];
                 this.signInFalse = true;
                 console.log(res);
               }
