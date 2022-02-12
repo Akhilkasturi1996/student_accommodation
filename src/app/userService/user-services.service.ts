@@ -1,17 +1,14 @@
 import { Injectable } from '@angular/core';
-import {SignInData} from '../../Models/signInData';
-import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import {SignInData} from '../Models/signInData';
 import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
-
+export class UserServicesService {
   private baseUrl = environment.baseUrl;
-  isAuthenticate = false;
   constructor(private http: HttpClient) { }
 
   loginByUsernamePassword(signInData: SignInData): Observable<any>{

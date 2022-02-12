@@ -16,13 +16,13 @@
           </div>
 
           <div class="div">
-            <input placeholder="Username" type="text" class="form-control input" formControlName="uname" name="username"
+            <input placeholder="University ID" type="text" class="form-control input" formControlName="uname" name="username"
             required>
           </div>
         </div>
 
         <mat-error *ngIf="(l.uname.touched || submitted) && l.uname.errors?.required ">
-          Username is Required
+          Username ID is Required
         </mat-error>
 
         <div class="input-div pass">

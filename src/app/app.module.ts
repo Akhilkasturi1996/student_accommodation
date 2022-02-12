@@ -21,6 +21,8 @@ import { MatListModule } from '@angular/material/list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {RegistrationComponent} from './registration/registration.component';
 import {CommonModule} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
+import {authInterceptorProviders} from './services/AuthInterceptor/AuthIntercepter';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import {CommonModule} from '@angular/common';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     CommonModule,
+    HttpClientModule,
     // material
     MatSidenavModule,
     MatToolbarModule,
@@ -48,7 +51,7 @@ import {CommonModule} from '@angular/common';
     MatDividerModule,
     MatListModule,
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

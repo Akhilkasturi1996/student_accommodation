@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {validate} from 'codelyzer/walkerFactory/walkerFn';
+import {RegistrationService} from '../services/Registration/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -13,7 +14,8 @@ export class RegistrationComponent implements OnInit {
   isSubmitted = false;
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private registrationService: RegistrationService
   ) {
     this.registrationForm = this.formBuilder.group({
       firstName: new FormControl('', [
@@ -22,12 +24,10 @@ export class RegistrationComponent implements OnInit {
         Validators.maxLength(30),
         Validators.pattern('^[a-zA-Z ]*$')]),
       lastName: new FormControl('', []),
-      addressGroup: this.formBuilder.group({
         address: new FormControl('', [
           Validators.required,
           Validators.maxLength(255)
         ]),
-      }),
       accountType: new FormControl('student', []),
       gender: new FormControl( '', [Validators.required]),
       phoneNumber: new FormControl('', [
@@ -71,10 +71,11 @@ export class RegistrationComponent implements OnInit {
   acctype = 'student';
   loading = false;
   submitted = false;
+  idExists = false;
 
 
   ngOnInit() {
-    console.log(this.registrationForm.value.addressGroup.address);
+    this.registrationForm.removeControl("staffId");
   }
 
   selectAccount(){
@@ -82,14 +83,48 @@ export class RegistrationComponent implements OnInit {
   }
 
 
-    onSubmit() {
+    async onSubmit() {
+     this.idExists = false;
     this.submitted = true;
 
     if (this.registrationForm.invalid) {
       return;
     }
+    let maxId;
+
+    await this.registrationService.getmaxUserId().toPromise().then(res =>  {console.log(res),
+      maxId = res['data']},
+      err => console.log(err));
 
     this.loading = true;
+    let newUserdata = {
+      userID: maxId+1,
+      firstName: this.registrationForm.value.firstName,
+      lastName: this.registrationForm.value.lastName,
+      gender: this.registrationForm.value.gender,
+      address: this.registrationForm.value.address,
+      email: this.registrationForm.value.email,
+      telno: this.registrationForm.value.phoneNumber,
+      role: this.registrationForm.value.accountType,
+      password: this.registrationForm.value.password,
+      profile:'pending',
+      uniID: this.registrationForm.value.studentId
+    };
+
+    if (this.registrationForm.value.accountType === 'student'){
+      newUserdata['status'] = 'active';
+    } else {
+      newUserdata['status'] = 'inactive';
+    }
+
+    this.registrationService.createUser(newUserdata).subscribe(resposne =>{
+    console.log(resposne), this.loading =false,
+      this.router.navigate(['login']);},
+    error => {console.log(error),
+      this.idExists = true,
+      this.loading =false});
+
+    console.log(newUserdata);
 
   }
 

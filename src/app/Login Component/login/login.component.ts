@@ -2,6 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {AuthenticationService} from '../../services/auth/authentication.service';
 import {SignInData} from '../../Models/signInData';
+import {UserServicesService} from '../../userService/user-services.service';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {TokenStorageService} from '../../services/tokenStorage/token-storage.service';
+import {AuthIntercepter} from '../../services/AuthInterceptor/AuthIntercepter';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +15,9 @@ import {SignInData} from '../../Models/signInData';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authenticationservice: AuthenticationService) {
+  constructor(private authenticationservice: AuthenticationService,
+              private tokenStorageService: TokenStorageService,
+              private router: Router) {
   }
 
   submitted = false;
@@ -31,22 +38,31 @@ export class LoginComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onSubmit() {
+  async onSubmit() {
     this.submitted = true;
     // username and password check
-    console.log(this.l.uname.errors);
     if (this.LoginForm.invalid) {
       return;
     }
 
     const signInData = new SignInData(this.LoginForm.value.uname, this.LoginForm.value.pword);
-    this.authenticationservice.authentcate(signInData);
-
-    if (!this.authenticationservice.authentcate(signInData)) {
-      this.signInFalse = true;
-    } else {
-      this.signInFalse = false;
-    }
+    await this.authenticationservice.loginByUsernamePassword(signInData).subscribe(
+      res => {
+              if (res.success){
+                this.tokenStorageService.saveToken(res.token);
+                this.authenticationservice.isAuthenticate = true;
+                this.router.navigate(['dashboard']);
+                console.log(res);
+              } else {
+                this.authenticationservice.isAuthenticate = false;
+                this.signInFalse = true;
+                console.log(res);
+              }
+               },
+      error => {
+        console.log(error['error']);
+      }
+    );
   }
 
 

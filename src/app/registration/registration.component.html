@@ -31,17 +31,17 @@
           </div>
         </div>
 
-        <div formGroupName="addressGroup" class="form-group">
+        <div class="form-group">
           <label>Address</label>
           <textarea placeholder="Enter Address Here.." rows="2" formControlName="address"
                     class="form-control"
-                    [ngClass]="{ 'is-invalid': submitted && f.addressGroup.get('address').errors }">
+                    [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
           </textarea>
-          <div *ngIf="submitted && f.addressGroup.get('address').errors" class="invalid-feedback">
-            <div *ngIf="f.addressGroup.get('address').errors.required">
+          <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors.required">
               Please Enter Address.
             </div>
-            <div *ngIf="f.addressGroup.get('address').errors.maxlength">
+            <div *ngIf="f.address.errors.maxlength">
               Only 255 characters are allowed.
             </div>
           </div>
@@ -73,8 +73,8 @@
             <label>Gender</label>
             <select class="form-control" formControlName="gender"
             [ngClass]="{'is-invalid': submitted && f.gender.errors}">
-              <option value='student'>Male</option>
-              <option value='admin'>Female</option>
+              <option value='male'>Male</option>
+              <option value='female'>Female</option>
             </select>
             <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
               <div>Please Select your gender</div>
@@ -113,36 +113,25 @@
             </div>
           </div>
 
-          <div *ngIf="acctype==='student'" class="col-sm-6 form-group">
-            <label>Student ID</label>
+          <div  class="col-sm-6 form-group">
+            <label *ngIf="acctype==='student'">Student ID</label>
+            <label *ngIf="acctype==='admin'">Staff ID</label>
             <input type="text" placeholder="DHD123456789" formControlName="studentId"
-                   class="form-control" [ngClass]="{'is-invalid':submitted && f.studentId.errors}"/>
+                   class="form-control" [ngClass]="{'is-invalid':submitted && f.studentId.errors || idExists}"/>
             <div *ngIf="f.studentId.errors" class="invalid-feedback">
               <div *ngIf="f.studentId.errors.required">
-                Please Enter Student ID.
+                Please Enter Univeristy ID.
               </div>
               <div *ngIf="f.studentId.errors.minlength">
-                The Student ID requied atleast 10 characters.
+                The Univeristy ID requied atleast 10 characters.
               </div>
               <div *ngIf="f.studentId.errors.maxlength">
-                The Student ID requied only 15 characters.
+                The Univeristy ID requied only 15 characters.
               </div>
             </div>
-          </div>
-
-          <div *ngIf="acctype==='admin'" class="col-sm-6 form-group">
-            <label>Staff ID</label>
-            <input type="text" placeholder="SAD12547" formControlName="staffId"
-                   class="form-control" [ngClass]="{'is-invalid':submitted && f.staffId.errors}"/>
-            <div *ngIf="f.staffId.errors" class="invalid-feedback">
-              <div *ngIf="f.staffId.errors.required">
-                Please Enter Student ID.
-              </div>
-              <div *ngIf="f.staffId.errors.minlength">
-                The Student ID requied atleast 05 characters.
-              </div>
-              <div *ngIf="f.staffId.errors.maxlength">
-                The Student ID requied only 10 characters.
+            <div *ngIf="idExists" class="invalid-feedback">
+              <div *ngIf="idExists">
+                The Univeristy ID Alredy Exists.
               </div>
             </div>
           </div>
