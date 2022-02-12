@@ -1,1 +1,190 @@
-<p>registration works!</p>
+<div class="container">
+  <h1 class="well">Registration Form</h1>
+  <div class="row main">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Enter First Name Here.." formControlName="firstName"
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+              <div *ngIf="f.firstName.errors.required">
+                Please Enter First Name.
+              </div>
+              <div *ngIf="f.firstName.errors.minlength">
+                First Name requied atleast 3 characters.
+              </div>
+              <div *ngIf="f.firstName.errors.maxlength">
+                First Name requied only 30 characters
+              </div>
+              <div *ngIf="f.firstName.errors.pattern">
+                Only characters are allowed.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Enter Last Name Here.." formControlName="lastName"
+                   class="form-control"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Address</label>
+          <textarea placeholder="Enter Address Here.." rows="2" formControlName="address"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+          </textarea>
+          <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors.required">
+              Please Enter Address.
+            </div>
+            <div *ngIf="f.address.errors.maxlength">
+              Only 255 characters are allowed.
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" placeholder="Enter Phone Number Here.." formControlName="phoneNumber"
+                 class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }"/>
+          <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+            <div *ngIf="f.phoneNumber.errors.required">
+              Please Enter Phone Number.
+            </div>
+            <div *ngIf="f.phoneNumber.errors.minlength">
+              Phone Number requied atleast 8 characters.
+            </div>
+            <div *ngIf="f.phoneNumber.errors.maxlength">
+              Phone Number requied only 12 characters.
+            </div>
+            <div *ngIf="f.phoneNumber.errors.pattern">
+              Only Numbers are allowed.
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Gender</label>
+            <select class="form-control" formControlName="gender"
+            [ngClass]="{'is-invalid': submitted && f.gender.errors}">
+              <option value='male'>Male</option>
+              <option value='female'>Female</option>
+            </select>
+            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+              <div>Please Select your gender</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Account Type</label>
+            <select class="form-control" formControlName="accountType" (click)="selectAccount()">
+              <option value='student'>Student Account</option>
+              <option value='admin'>Admin Account</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Email Address</label>
+            <input type="text" placeholder="Enter Email Address Here.." formControlName="email"
+                   class="form-control" [ngClass]="{'is-invalid': submitted && f.email.errors}"/>
+            <div *ngIf="f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">
+                Please Enter Email.
+              </div>
+              <div *ngIf="f.email.errors.minlength">
+                The email requied atleast 5 characters.
+              </div>
+              <div *ngIf="f.email.errors.maxlength">
+                The email requied only 80 characters.
+              </div>
+              <div *ngIf="f.email.errors.pattern">
+                The Email is not valid.
+              </div>
+            </div>
+          </div>
+
+          <div  class="col-sm-6 form-group">
+            <label *ngIf="acctype==='student'">Student ID</label>
+            <label *ngIf="acctype==='admin'">Staff ID</label>
+            <input type="text" placeholder="DHD123456789" formControlName="studentId"
+                   class="form-control" [ngClass]="{'is-invalid':submitted && f.studentId.errors || idExists}"/>
+            <div *ngIf="f.studentId.errors" class="invalid-feedback">
+              <div *ngIf="f.studentId.errors.required">
+                Please Enter Univeristy ID.
+              </div>
+              <div *ngIf="f.studentId.errors.minlength">
+                The Univeristy ID requied atleast 10 characters.
+              </div>
+              <div *ngIf="f.studentId.errors.maxlength">
+                The Univeristy ID requied only 15 characters.
+              </div>
+            </div>
+            <div *ngIf="idExists" class="invalid-feedback">
+              <div *ngIf="idExists">
+                The Univeristy ID Alredy Exists.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-sm-6 form-group">
+            <label>Password</label>
+            <input type="password" placeholder="Enter Password Here.." formControlName="password"
+                   class="form-control" [ngClass]="{'is-invalid':submitted && f.password.errors}"/>
+            <div *ngIf="f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">
+                Please Enter Password.
+              </div>
+              <div *ngIf="f.password.errors.minlength">
+                The password requied atleast 5 characters.
+              </div>
+              <div *ngIf="f.password.errors.maxlength">
+                The password requied only 12 characters.
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-6 form-group">
+            <label>Confrim Password</label>
+            <input type="password" placeholder="Enter Password Here.." formControlName="confPassword"
+                   class="form-control"
+                   [ngClass]="{'is-invalid':submitted && f.password.value !== f.confPassword.value}"/>
+            <div *ngIf="f.confPassword.errors || f.password.value !== f.confPassword.value" class="invalid-feedback">
+              <div *ngIf="f.password.value !== f.confPassword.value">
+                Passwords are Not Matched
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" (click)="onSubmit()" class="spinner-border spinner-border-sm mr-1"></span>
+            Register
+          </button>
+          <a routerLink="../login" class="btn btn-link">Cancel</a>
+        </div>
+
+      </div>
+
+
+    </form>
+  </div>
+</div>
+
+<div class="background-color">
+
+</div>
