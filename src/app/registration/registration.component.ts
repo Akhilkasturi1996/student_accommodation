@@ -124,8 +124,6 @@ export class RegistrationComponent implements OnInit {
       this.idExists = true,
       this.loading =false});
 
-    console.log(newUserdata);
-
   }
 
 }
