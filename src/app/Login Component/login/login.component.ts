@@ -51,14 +51,13 @@ export class LoginComponent implements OnInit {
       res => {
               if (res.success){
                 this.tokenStorageService.saveToken(res.token);
+                this.tokenStorageService.saveUser(res.role);
                 this.authenticationservice.isAuthenticate = true;
                 this.router.navigate(['dashboard']);
-                console.log(res);
               } else {
                 this.authenticationservice.isAuthenticate = false;
-                this.signInError= res['message'];
+                this.signInError = res['message'];
                 this.signInFalse = true;
-                console.log(res);
               }
                },
       error => {
