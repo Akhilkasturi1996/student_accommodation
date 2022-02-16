@@ -5,6 +5,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { AuthGuard } from './guards/auth.guard';
 import {RegistrationComponent} from './registration/registration.component';
+import {CheckRoomComponent} from './check-room/check-room.component';
+import {RoomBookingComponent} from './room-booking/room-booking.component';
 
 
 const routes: Routes = [
@@ -13,6 +15,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'payment', component: PaymentsComponent, canActivate: [AuthGuard]},
   { path: 'signup', component: RegistrationComponent},
+  { path: 'checkAvailability', component: CheckRoomComponent, canActivate: [AuthGuard]},
+  { path: 'newBooking', component: RoomBookingComponent, canActivate: [AuthGuard]},
+
   {
     path: 'login',
     loadChildren: () => import('../app/Login Component/login/login.module').then(m => m.LoginModule)

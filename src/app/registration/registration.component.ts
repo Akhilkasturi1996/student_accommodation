@@ -39,7 +39,7 @@ export class RegistrationComponent implements OnInit {
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(80),
-        Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ]),
       password: new FormControl('', [
         Validators.required,
