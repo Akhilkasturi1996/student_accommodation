@@ -20,7 +20,6 @@ export class CheckRoomComponent implements OnInit {
   showTable = false;
   blockId = [];
 
-  // checkRoomForm: FormGroup;
 
   constructor(private tokenStorageService: TokenStorageService,
               private bookingService: BookingService,
@@ -43,17 +42,41 @@ export class CheckRoomComponent implements OnInit {
       this.isAdmin = true;
     } else {
       this.isAdmin = false;
+    }
+    this.getBlockByGenderId();
+  }
 
-      this.getBlockByGenderId();
+  getBlockByGenderIdforAdmin(e: any) {
+    let gentype;
+    if (e.value == 1) {
+      gentype = 'male';
+    } else {
+      gentype = 'female';
     }
 
+    this.blockId = [];
+    this.bookingService.getBlockByGender(gentype).subscribe(
+      res => {
+        console.log(res);
+        if (res['data'].length > 0) {
+          const room = res['data'];
+          // tslint:disable-next-line:prefer-for-of
+          for (let x = 0; x < room.length; x++) {
+            this.blockId.push(room[x]);
+          }
+        }
+
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   getBlockByGenderId() {
     this.blockId = [];
     this.bookingService.getBlockByGender(localStorage.getItem('gender')).subscribe(
       res => {
-        console.log(res);
         if (res['data'].length > 0) {
           const room = res['data'];
           // tslint:disable-next-line:prefer-for-of
@@ -78,7 +101,6 @@ export class CheckRoomComponent implements OnInit {
     this.rooms = [];
     this.submitted = true;
 
-    console.log(this.checkRoomForm.value);
 
     if (this.checkRoomForm.value.startDate > this.checkRoomForm.value.endDate) {
       this.checkRoomForm.controls['startDate'].setErrors({
@@ -97,7 +119,6 @@ export class CheckRoomComponent implements OnInit {
 
     await this.bookingService.getAvailableRooms(this.checkRoomForm.value).toPromise().then(
       res => {
-        console.log(res);
         if (res['success']) {
           console.log(res['data'].length);
           if (res['data'].length > 0) {
