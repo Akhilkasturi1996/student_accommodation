@@ -53,6 +53,8 @@ export class LoginComponent implements OnInit {
                 this.tokenStorageService.saveToken(res.token);
                 this.tokenStorageService.saveUser(res.role);
                 this.authenticationservice.isAuthenticate = true;
+                this.tokenStorageService.saveUserID(this.LoginForm.value.uname);
+                this.tokenStorageService.saveStudentType(this.LoginForm.value.uname);
                 this.router.navigate(['dashboard']);
               } else {
                 this.authenticationservice.isAuthenticate = false;

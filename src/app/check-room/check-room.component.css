@@ -1,0 +1,18 @@
+@import "../home/home.component.css";
+
+table {
+  width: 90%;
+  text-align: center;
+
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+form, .selected-date,table{
+  font-size: large;
+  font-weight: 500;
+}
+
+
