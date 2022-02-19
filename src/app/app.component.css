@@ -38,5 +38,9 @@ mat-drawer {
 @media screen and (max-width: 750px) {
   .mat-icon {
     display: block;
+    max-height: 100vh;
+  }
+  .logo{
+    height: 0;
   }
 }

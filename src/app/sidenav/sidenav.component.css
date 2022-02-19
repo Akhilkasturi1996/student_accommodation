@@ -3,6 +3,10 @@
   margin-right: 1rem;
 }
 
+mat-nav-list{
+  overflow-x: hidden;
+}
+
 .logo {
   text-align: center;
   padding: 2.6rem 1rem;
@@ -17,7 +21,7 @@
   color: #94a3b8 !important;
   font-size: 1rem;
   height: 44px !important;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 .mat-list-item:hover {
   color: #f2f5f7 !important;
@@ -59,5 +63,12 @@ color: white;
 
 .sub-menus .list-item-active ::ng-deep .mat-list-item-content {
   background: #05485a !important;
+}
+
+@media screen and (max-width: 750px) {
+  .logo{
+    height: 0;
+    padding: 0;
+  }
 }
 
