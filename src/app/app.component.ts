@@ -12,6 +12,7 @@ export class AppComponent {
   show = false;
   setwidth = '65px';
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
+  showText = false;
 
   constructor(public authenticateservice: AuthenticationService) {
   }
@@ -24,16 +25,19 @@ export class AppComponent {
 
   maximise() {
     document.getElementById('drawer').style.width = '200px';
+    this.showText = true;
   }
 
   minimise() {
     document.getElementById('drawer').style.width = '65px';
+    this.showText = false;
   }
 
   minimiseSidebar() {
     if (this.show) {
       document.getElementById('drawer').style.width = '65px';
       this.show = !this.show;
+      this.showText = false;
     }
   }
 
@@ -42,8 +46,10 @@ export class AppComponent {
     this.show = !this.show;
     if (this.show) {
       document.getElementById('drawer').style.width = '200px';
+      this.showText = true;
     } else {
       document.getElementById('drawer').style.width = '65px';
+      this.showText = false;
     }
   }
 }

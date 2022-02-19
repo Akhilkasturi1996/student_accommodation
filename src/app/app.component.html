@@ -4,7 +4,7 @@
     <button class="mat-icon" mat-icon-button (click)="toggleSidebar()">
       <mat-icon>menu</mat-icon>
     </button>
-    <app-sidenav (mouseover)="maximise()" (mouseleave)="minimise()"></app-sidenav>
+    <app-sidenav [showText]="showText" (mouseover)="maximise()" (mouseleave)="minimise()"></app-sidenav>
   </mat-drawer>
   <mat-drawer-content (click)="minimiseSidebar()">
     <app-header *ngIf="authenticateservice.isAuthenticate" (toggleSidebarForMe)="sideBarToggler()"></app-header>

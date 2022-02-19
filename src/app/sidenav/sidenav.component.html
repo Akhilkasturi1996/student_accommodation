@@ -1,5 +1,5 @@
 <mat-nav-list>
-  <div class="logo py-4">
+  <div class="logo py-2">
 <!--    <img src="./assets/logo.png" alt="Company Logo" />-->
   </div>
   <mat-divider></mat-divider>
@@ -7,38 +7,38 @@
 <br>
   <a mat-list-item routerLinkActive="list-item-active"
      (click)="clickMenuItem('home')" routerLink="/home">
-    <mat-icon>home</mat-icon> <span>Home</span>
+    <mat-icon>home</mat-icon> <span *ngIf="showText">Home</span>
   </a>
 
   <a mat-list-item routerLinkActive="list-item-active"
      (click)="clickMenuItem('dashboard')" routerLink="/dashboard">
-    <mat-icon>dashboard</mat-icon> Dashboard
+    <mat-icon>dashboard</mat-icon> <span *ngIf="showText"> Dashboard </span>
   </a>
 
 
   <a mat-list-item routerLinkActive="list-item-active"  (click)="clickMenuItem('booking')">
-    <mat-icon>booking</mat-icon> Booking
+    <mat-icon>booking</mat-icon> <span *ngIf="showText"> Booking </span>
   </a>
 
   <div class="sub-menus">
     <a *ngIf="'booking'===submenu" mat-list-item routerLinkActive="list-item-active" routerLink="/newBooking">
-      <mat-icon>book</mat-icon> New Booking
+      <mat-icon>book</mat-icon> <span *ngIf="showText"> New Booking </span>
     </a>
 
     <a *ngIf="'booking'===submenu" mat-list-item routerLinkActive="list-item-active" routerLink="/dashboard3">
-      <mat-icon>dashboard</mat-icon> Booking History
+      <mat-icon>dashboard</mat-icon> <span *ngIf="showText"> Booking History </span>
     </a>
   </div>
 
   <a mat-list-item routerLinkActive="list-item-active"
      (click)="clickMenuItem('check')" routerLink="/checkAvailability">
-    <mat-icon>check</mat-icon> Check Availability
+    <mat-icon>check</mat-icon><span *ngIf="showText"> Check Availability </span>
   </a>
 
 
   <a mat-list-item routerLinkActive="list-item-active"
      (click)="clickMenuItem('payment')" routerLink="/payment1">
-    <mat-icon>payment</mat-icon> Payment
+    <mat-icon>payment</mat-icon> <span *ngIf="showText"> Payment </span>
   </a>
 
 </mat-nav-list>

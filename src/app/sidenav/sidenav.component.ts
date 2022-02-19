@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatMenuItem} from '@angular/material/menu';
 
 @Component({
@@ -9,16 +9,18 @@ import {MatMenuItem} from '@angular/material/menu';
 export class SidenavComponent implements OnInit {
   submenu = '';
   tempmenu = '';
+  @Input() showText = false;
 
   constructor() {
   }
 
   ngOnInit(): void {
+
   }
 
   clickMenuItem(menuItem: string) {
     this.submenu = menuItem;
-
+    console.log(this.showText);
     if (this.tempmenu === this.submenu){
       this.submenu = '';
       this.tempmenu = '';
