@@ -7,6 +7,7 @@ import { AuthGuard } from './guards/auth.guard';
 import {RegistrationComponent} from './registration/registration.component';
 import {CheckRoomComponent} from './check-room/check-room.component';
 import {RoomBookingComponent} from './room-booking/room-booking.component';
+import {InventoryComponent} from './inventory/inventory.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'signup', component: RegistrationComponent},
   { path: 'checkAvailability', component: CheckRoomComponent, canActivate: [AuthGuard]},
   { path: 'newBooking', component: RoomBookingComponent, canActivate: [AuthGuard]},
+  { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard]},
 
   {
     path: 'login',

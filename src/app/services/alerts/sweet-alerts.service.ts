@@ -17,8 +17,8 @@ export class SweetAlertsService {
     Swal.fire(
       title,
       message,
-    'question'
-  );
+      'question'
+    );
   }
 
   errorAlerts(titles: string, message: string) {
@@ -58,10 +58,10 @@ export class SweetAlertsService {
     });
   }
 
-  deleteAlertSwt(){
+  deleteAlertSwt() {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      text: 'You won\'t be able to revert this!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -78,18 +78,18 @@ export class SweetAlertsService {
     });
   }
 
-  deleteAlertSwt1(){
+  deleteAlertSwt1() {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
         cancelButton: 'btn btn-danger'
       },
       buttonsStyling: false
-    })
+    });
 
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      text: 'You won\'t be able to revert this!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
@@ -109,6 +109,43 @@ export class SweetAlertsService {
         swalWithBootstrapButtons.fire(
           'Cancelled',
           'Your imaginary file is safe :)',
+          'error'
+        );
+      }
+    });
+  }
+
+  ConfirmWithSureMessage(textGiven: string, successMsg: string, cancelMsg: string) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: true
+    });
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: textGiven,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'confirm!',
+      cancelButtonText: 'cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        swalWithBootstrapButtons.fire(
+          'Success!',
+          successMsg,
+          'success'
+        );
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          cancelMsg,
           'error'
         );
       }

@@ -1,62 +1,126 @@
-<div class="col-md-12">
-  <div class="x_title">
-    <h2>Add Hostel Booking</h2>
+<div class="container-fluid page">
+  <div class="d-flex page__box p-3 mt-2 dash">ADD NEW BOOKING</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="col-md-12">
+      <div class="x_title">
+      </div>
+      <div class="x_content">
+        <form class="mt-3" [formGroup]="roomBookingForm">
+
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <label>Start Date</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="date" class="form-control" formControlName="startDate"
+                     [ngClass]="{'is-invalid': submitted && r.startDate.errors}">
+              <div *ngIf="r.startDate.errors" class="invalid-feedback mt-2">
+                <div *ngIf="r.startDate.errors.required">
+                  Please Select a Starting Date.
+                </div>
+                <div *ngIf="r.startDate.errors.smallDate">
+                  Please Select a Larger Date than Today.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <label>End Date</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="date" class="form-control" formControlName="endDate"
+                     [ngClass]="{'is-invalid': submitted && r.endDate.errors}"/>
+              <div *ngIf="r.endDate.errors" class="invalid-feedback mt-2">
+                <div *ngIf="r.endDate.errors.required">
+                  Please Select a End Date.
+                </div>
+                <div *ngIf="r.endDate.errors.notLarge">
+                  Please Select a Valid Date Range.
+                </div>
+                <div *ngIf="r.endDate.errors.smallDate">
+                  Please Select a Larger Date than Today.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="isAdmin" class="row mb-2">
+            <div class="col-sm-6">
+              <label>Student Number</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="sid" value="" id="sid" formControlName="sID">
+            </div>
+          </div>
+
+          <div *ngIf="!isAdmin" class="row mb-2">
+            <div class="col-sm-6">
+              <label>Block</label>
+            </div>
+
+            <div class="col-sm-6">
+              <select class="form-control" formControlName="blockID"
+                      [ngClass]="{'is-invalid': submitted && r.blockID.errors}">
+                <option value="">Please Select</option>
+                <option *ngFor="let block of blockId"
+                        value="{{block.blockID}}">{{block.blockNO + ' - ' + block.blockName}}</option>
+              </select>
+            </div>
+          </div>
+
+          <!--      <div class="row mb-2">-->
+          <!--        <div class="col-sm-6">-->
+          <!--          <label>Room No</label>-->
+          <!--        </div>-->
+
+          <!--        <div class="col-sm-6">-->
+          <!--          <select class="form-control" name="room" id="txtHint" formControlName="RoomNo">-->
+          <!--            <option value="">Please Select</option>-->
+          <!--            <option value="">2</option>-->
+          <!--          </select>-->
+          <!--        </div>-->
+          <!--      </div>-->
+
+          <div class="row mb-3">
+            <div class="col-sm-8">
+
+            </div>
+
+            <div class="col-sm-4">
+              <input type="submit" (click)="onSubmit()" class="form-control btn btn-primary" name="request" value="Submit"/>
+            </div>
+          </div>
+        </form>
+        <!--    *ngIf="!showTable"-->
+        <div class="row table-div">
+          <table class="table mt-4 ml-4">
+            <thead>
+            <tr>
+              <th>No.</th>
+              <th>Block Name</th>
+              <th>Room No.</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let room of rooms;let j=index">
+              <th>{{j + 1}}</th>
+              <td>{{room['blockName']}}</td>
+              <td>{{room['roomNo']}}</td>
+              <td>
+                <button (click)="ConfirmWithSureMessage(room.roomID)" type="button" class="btn btn-warning">Book</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
   </div>
-  <div class="x_content">
-    <form class="" action="" method="post">
-      <table class="table">
-        <tr>
-          <td style="border:0;">
-            <label for="name">Start Date</label>
-          </td>
-          <td style="border:0;">
-            <input class="form-control" type="date" name="startdate" value="" id="startdate" required>
-          </td>
-        </tr>
-        <tr>
-          <td style="border:0;">
-            <label for="name">End Date</label>
-          </td>
-          <td style="border:0;">
-            <input type="date" class="form-control" name="enddate" value="" id="enddate" required>
-          </td>
-        </tr>
-        <tr>
-          <td style="border:0;">
-            <label for="name">Student Number</label>
-          </td>
-          <td style="border:0;">
-            <input type="text" class="form-control" name="sid" value="" id="sid" required>
-          </td>
-        </tr>
-        <tr>
-          <td style="border:0;">
-            <label for="name">Block</label>
-          </td>
-          <td style="border:0;">
-            <select class="form-control" id="floortxt" name="floor" required>
-              <option value="">1</option>
-              <option value="">2</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td style="border:0;">
-            <label for="name">Room No</label>
-          </td>
-          <td style="border:0;">
-            <select class="form-control" name="room" id="txtHint" required>
-              <option value="">1</option>
-              <option value="">2</option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td style="border:0;">
-            <input class="form-control btn btn-warning" type="submit" name="request" value="Request" />
-          </td>
-        </tr>
-      </table>
-    </form>
-  </div>
-</div>

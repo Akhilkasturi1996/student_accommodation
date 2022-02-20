@@ -19,12 +19,14 @@ export class CheckRoomComponent implements OnInit {
   rooms = [];
   showTable = false;
   blockId = [];
-
+  today = new Date();
+  today1;
 
   constructor(private tokenStorageService: TokenStorageService,
               private bookingService: BookingService,
               private datePipe: DatePipe,
               private sweetAlerts: SweetAlertsService) {
+    this.today1 = this.datePipe.transform(this.today, 'yyyy-MM-dd');
 
   }
 
@@ -100,6 +102,16 @@ export class CheckRoomComponent implements OnInit {
     this.showTable = false;
     this.rooms = [];
     this.submitted = true;
+
+    if (this.checkRoomForm.value.startDate <this.today1 || this.today <= this.checkRoomForm.value.endDate1) {
+      this.checkRoomForm.controls['startDate'].setErrors({
+        smallDate: true
+      });
+      this.checkRoomForm.controls['endDate'].setErrors({
+        smallDate: true
+      });
+      return;
+    }
 
 
     if (this.checkRoomForm.value.startDate > this.checkRoomForm.value.endDate) {

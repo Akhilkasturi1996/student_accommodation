@@ -20,7 +20,6 @@ export class SidenavComponent implements OnInit {
 
   clickMenuItem(menuItem: string) {
     this.submenu = menuItem;
-    console.log(this.showText);
     if (this.tempmenu === this.submenu){
       this.submenu = '';
       this.tempmenu = '';

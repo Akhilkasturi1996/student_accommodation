@@ -1,12 +1,13 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthenticationService} from './services/auth/authentication.service';
+import {TokenStorageService} from './services/tokenStorage/token-storage.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'student-accommodation';
   sideBarOpen = true;
   show = false;
@@ -14,7 +15,15 @@ export class AppComponent {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
   showText = false;
 
-  constructor(public authenticateservice: AuthenticationService) {
+  constructor(public authenticateservice: AuthenticationService,
+              private tokenService: TokenStorageService) {
+  }
+
+  ngOnInit() {
+    this.authenticateservice.isAuthenticate = !!this.tokenService.getToken();
+    if (!this.authenticateservice.isAuthenticate) {
+      this.tokenService.signOut();
+    }
   }
 
 
