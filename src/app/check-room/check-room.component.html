@@ -15,6 +15,12 @@
               <div *ngIf="c.startDate.errors.required">
                 Please Select a Starting Date.
               </div>
+              <div *ngIf="c.endDate.errors.notLarge">
+                Please Select a Valid Date Range.
+              </div>
+              <div *ngIf="c.endDate.errors.smallDate">
+                Please Select a Larger Date than Today.
+              </div>
             </div>
           </div>
         </div>
@@ -32,6 +38,9 @@
               </div>
               <div *ngIf="c.endDate.errors.notLarge">
                 Please Select a Valid Date Range.
+              </div>
+              <div *ngIf="c.endDate.errors.smallDate">
+                Please Select a Larger Date than Today.
               </div>
             </div>
           </div>
@@ -85,20 +94,20 @@
       </div>
       <br>
 
-      <div class="row">
+      <div class="row table-div">
         <table *ngIf="showTable" class="table mt-4 ml-4">
           <thead>
-          <tr class="row">
-            <th class="col-sm-4">No.</th>
-            <th class="col-sm-4" scope="col">Block ID</th>
-            <th class="col-sm-4" scope="col">Room No.</th>
+          <tr>
+            <th>No.</th>
+            <th>Block ID</th>
+            <th>Room No.</th>
           </tr>
           </thead>
           <tbody>
-          <tr class="row" *ngFor="let i of rooms;let j=index">
-            <th class="col-sm-4" scope="row">{{j + 1}}</th>
-            <td class="col-sm-4">1</td>
-            <td class="col-sm-4">{{i['roomNo']}}</td>
+          <tr *ngFor="let i of rooms;let j=index">
+            <th>{{j + 1}}</th>
+            <td>{{i["blockName"]}}</td>
+            <td>{{i['roomNo']}}</td>
           </tr>
           </tbody>
 

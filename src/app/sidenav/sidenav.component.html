@@ -41,4 +41,10 @@
     <mat-icon>payment</mat-icon> <span *ngIf="showText"> Payment </span>
   </a>
 
+  <a mat-list-item routerLinkActive="list-item-active"
+     (click)="clickMenuItem('payment')" routerLink="/inventory">
+    <mat-icon>inventory</mat-icon> <span *ngIf="showText"> Inventory </span>
+  </a>
+
+
 </mat-nav-list>
