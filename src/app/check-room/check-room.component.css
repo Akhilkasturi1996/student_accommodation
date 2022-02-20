@@ -6,6 +6,10 @@ table {
 
 }
 
+.table-div{
+  overflow-x: auto;
+}
+
 th.mat-sort-header-sorted {
   color: black;
 }
@@ -15,4 +19,10 @@ form, .selected-date,table{
   font-weight: 500;
 }
 
+@media screen and (max-width: 750px) {
+  form, .selected-date,table{
+    font-size: medium;
+    font-weight: 400;
+  }
+}
 

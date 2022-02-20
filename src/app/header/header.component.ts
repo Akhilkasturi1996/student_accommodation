@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit {
       );
     } else {
       this.userName = 'guest';
+      this.tokenStorageService.signOut();
     }
   }
 

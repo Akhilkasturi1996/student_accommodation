@@ -23,6 +23,9 @@ import {CommonModule, DatePipe} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {authInterceptorProviders} from './services/AuthInterceptor/AuthIntercepter';
 import {CheckRoomComponent} from './check-room/check-room.component';
+import {RoomBookingComponent} from './room-booking/room-booking.component';
+import { InventoryComponent } from './inventory/inventory.component';
+import { PopUpModelComponent } from './room-booking/PopUp Model/pop-up-model/pop-up-model.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import {CheckRoomComponent} from './check-room/check-room.component';
     PaymentsComponent,
     RegistrationComponent,
     CheckRoomComponent,
+    RoomBookingComponent,
+    InventoryComponent,
+    PopUpModelComponent
 
   ],
   imports: [
