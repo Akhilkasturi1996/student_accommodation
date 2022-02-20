@@ -1,0 +1,97 @@
+<div class="container-fluid px-0">
+  <div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2 dash">Inventory</div>
+    <div class="page__content shadow p-3 position-relative">
+
+
+
+      <app-pop-up-model></app-pop-up-model>
+      <div>Room Details</div>
+
+      <div class="row mt-4">
+        <div class="col-sm-3">
+          <label>Search</label>
+        </div>
+        <div class="col-sm-8">
+          <input (keyup)="filterTableData($event.target)" class="form-control">
+        </div>
+      </div>
+
+      <div class="row table-div pr-2">
+        <table class="table mt-4 ml-4">
+          <thead>
+          <tr>
+            <th>No.</th>
+            <th>Block ID</th>
+            <th>Room No.</th>
+            <th>Status</th>
+            <th colspan="2">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let room of tempRoom;let j=index">
+            <td>{{j + 1}}</td>
+            <td>{{room['blockName']}}</td>
+            <td>{{room['roomNo']}}</td>
+            <td>Active</td>
+            <td>
+              <button type="button" class="btn btn-warning">Update</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <br>
+
+      <div>Block Details</div>
+
+      <div class="row mt-4">
+        <div class="col-sm-3">
+          <label>Search</label>
+        </div>
+        <div class="col-sm-8">
+          <input class="form-control">
+        </div>
+      </div>
+
+      <div class="row table-div pr-2">
+        <table class="table mt-4 ml-4">
+          <thead>
+          <tr>
+            <th>No.</th>
+            <th>Block Name</th>
+            <th>Room No.</th>
+            <th>Status</th>
+            <th colspan="2">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let room of rooms['data'];let j=index">
+            <th>{{j + 1}}</th>
+            <td>{{room['blockName']}}</td>
+            <td>{{room['roomNo']}}</td>
+            <td>Active</td>
+            <td>
+              <button type="button" class="btn btn-warning">Update</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
