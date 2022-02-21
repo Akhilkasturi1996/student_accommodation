@@ -110,6 +110,7 @@
               <th>No.</th>
               <th>Block Name</th>
               <th>Room No.</th>
+              <th>Pay Amount</th>
               <th>Action</th>
             </tr>
             </thead>
@@ -118,6 +119,7 @@
               <th>{{j + 1}}</th>
               <td>{{room['blockName']}}</td>
               <td>{{room['roomNo']}}</td>
+              <td>${{payment}}</td>
               <td>
                 <button (click)="ConfirmWithSureMessage(room.roomID)" type="button" class="btn btn-warning">Book</button>
               </td>

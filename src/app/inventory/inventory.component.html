@@ -5,7 +5,9 @@
 
 
 
-      <app-pop-up-model></app-pop-up-model>
+      <app-pop-up-model (popUpItemEvent)="createBlock($event)" (popUpRoomDataEvent)="createRoom($event)"
+      (popUpUpdateRoomEvent)="updateRooms($event)"
+      (popUpUpdateBlockEvent)="updateBlock($event)"></app-pop-up-model>
       <div>Room Details</div>
 
       <div class="row mt-4">
@@ -22,7 +24,7 @@
           <thead>
           <tr>
             <th>No.</th>
-            <th>Block ID</th>
+            <th>Block Name</th>
             <th>Room No.</th>
             <th>Status</th>
             <th colspan="2">Action</th>
@@ -35,10 +37,10 @@
             <td>{{room['roomNo']}}</td>
             <td>Active</td>
             <td>
-              <button type="button" class="btn btn-warning">Update</button>
+              <button (click)="updateRoom(room)" type="button" class="btn btn-warning">Update</button>
             </td>
             <td>
-              <button type="button" class="btn btn-danger">Delete</button>
+              <button (click)="deleteRoom(room.roomID)" type="button" class="btn btn-danger">Delete</button>
             </td>
           </tr>
           </tbody>
@@ -54,7 +56,7 @@
           <label>Search</label>
         </div>
         <div class="col-sm-8">
-          <input class="form-control">
+          <input class="form-control" (keyup)="filterBlockTableData($event.target)">
         </div>
       </div>
 
@@ -76,10 +78,10 @@
             <td>{{block['blockNO']}}</td>
             <td>{{block['genderType'].toUpperCase()}}</td>
             <td>
-              <button type="button" class="btn btn-warning">Update</button>
+              <button (click)="callUpdateBlock(block)" type="button" class="btn btn-warning">Update</button>
             </td>
             <td>
-              <button type="button" class="btn btn-danger">Delete</button>
+              <button (click)="deleteBlock(block.blockID)" type="button" class="btn btn-danger">Delete</button>
             </td>
           </tr>
           </tbody>
