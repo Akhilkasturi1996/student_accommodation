@@ -48,7 +48,7 @@ export class SweetAlertsService {
 
 // success,info,danger
 
-  customSuccessAlert(ico: string, message: string) {
+  customSuccessAlert(message: string) {
     Swal.fire({
       position: 'top-end',
       icon: 'success',

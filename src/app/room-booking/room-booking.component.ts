@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {SweetAlertsService} from '../services/alerts/sweet-alerts.service';
 import Swal from 'sweetalert2';
+import {RegistrationService} from '../services/Registration/registration.service';
 
 @Component({
   selector: 'app-room-booking',
@@ -24,24 +25,26 @@ export class RoomBookingComponent implements OnInit {
   constructor(private bookingService: BookingService,
               private tokenStorageService: TokenStorageService,
               private datePipe: DatePipe,
+              private regService: RegistrationService,
               private sweetAlerts: SweetAlertsService) {
     this.today1 = this.datePipe.transform(this.today, 'yyyy-MM-dd');
   }
 
   roomBookingForm = new FormGroup({
     startDate: new FormControl('', [Validators.required]),
-    endDate: new FormControl('', [Validators.required]),
-    blockID: new FormControl('', [Validators.required])
+    endDate: new FormControl('', [Validators.required])
   });
 
   ngOnInit(): void {
     this.userType = this.tokenStorageService.getUser();
     if (this.userType === 'admin') {
       this.isAdmin = true;
+      this.roomBookingForm.addControl('sID', new FormControl('', [Validators.required]));
     } else {
       this.isAdmin = false;
+      this.roomBookingForm.addControl('blockID', new FormControl('', [Validators.required]));
+      this.getBlockByGenderId();
     }
-    this.getBlockByGenderId();
   }
 
   get r() {
@@ -120,29 +123,81 @@ export class RoomBookingComponent implements OnInit {
     if (this.roomBookingForm.invalid) {
       return;
     }
-
-
-    await this.bookingService.getAvailableRooms(this.roomBookingForm.value).toPromise().then(
-      res => {
-        if (res['success']) {
-          if (res['data'].length > 0) {
-            const room = res['data'];
-            // tslint:disable-next-line:prefer-for-of
-            for (let x = 0; x < room.length; x++) {
-              this.rooms.push(room[x]);
-            }
-            this.showTable = true;
-          } else {
-            this.sweetAlerts.errorAlerts('Unavailable',
-              'There are no rooms available for selected dates');
+    if (this.isAdmin) {
+      let gender;
+      let blocks = [];
+      await this.regService.getUserByUniId(this.roomBookingForm.value.sID).toPromise().then(
+        res => {
+          if (res['success']) {
+            gender = res['data']['gender'];
           }
         }
+      ).catch(
+        err => {
+          console.log(err);
+        }
+      );
+
+      const data = await this.bookingService.getBlockByGender(gender).toPromise().then().catch(
+        err => {
+          console.log(err);
+        }
+      );
+
+      for (let i = 0; i < data['data'].length; i++) {
+
+        this.roomBookingForm.value['blockID'] = data['data'][i]['blockID'];
+        await this.bookingService.getAvailableRooms(this.roomBookingForm.value).toPromise().then(
+          res => {
+            if (res['success']) {
+              if (res['data'].length > 0) {
+                const room = res['data'];
+                // tslint:disable-next-line:prefer-for-of
+                for (let x = 0; x < room.length; x++) {
+                  this.rooms.push(room[x]);
+                }
+                this.showTable = true;
+              } else if (i < data['data'].length) {
+              } else {
+                this.sweetAlerts.errorAlerts('Unavailable',
+                  'There are no rooms available for selected dates');
+              }
+            }
+          }
+        ).catch(
+          err => {
+            console.log(err);
+          }
+        );
+
       }
-    ).catch(
-      err => {
-        console.log(err);
-      }
-    );
+    }
+    else {
+      await this.bookingService.getAvailableRooms(this.roomBookingForm.value).toPromise().then(
+        res => {
+          if (res['success']) {
+            if (res['data'].length > 0) {
+              const room = res['data'];
+              // tslint:disable-next-line:prefer-for-of
+              for (let x = 0; x < room.length; x++) {
+                this.rooms.push(room[x]);
+              }
+              this.showTable = true;
+            } else {
+              this.sweetAlerts.errorAlerts('Unavailable',
+                'There are no rooms available for selected dates');
+            }
+          }
+        }
+      ).catch(
+        err => {
+          console.log(err);
+        }
+      );
+    }
+
+
+
 
   }
 
@@ -165,26 +220,46 @@ export class RoomBookingComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
+        let userBookingData;
+        if (this.isAdmin) {
+          userBookingData = {
+            roomId: roomID,
+            startDate: this.roomBookingForm.value.startDate,
+            endDate: this.roomBookingForm.value.endDate,
+            payment: 1000.00,
+            totalyPaid: 0.00,
+            status: 'active',
+            uniID: this.roomBookingForm.value.sID,
+          };
+        } else {
+          userBookingData = {
+            roomId: roomID,
+            startDate: this.roomBookingForm.value.startDate,
+            endDate: this.roomBookingForm.value.endDate,
+            payment: 1000.00,
+            totalyPaid: 0.00,
+            status: 'active',
+            uniID: localStorage.getItem('userID')
+          };
+        }
 
-        let userBookingData = {
-          roomId: roomID,
-          startDate: this.roomBookingForm.value.startDate,
-          endDate: this.roomBookingForm.value.endDate,
-          payment: 1000.00,
-          totalyPaid: 0.00,
-          status: 'active',
-          uniID: localStorage.getItem('userID')
-        };
         this.bookingService.addNewBooking(userBookingData).toPromise().then(
           res => {
             console.log(res);
-            swalWithBootstrapButtons.fire(
-              'Success!',
-              'Booking Successfully Added',
-              'success'
-            );
-            this.roomBookingForm.reset();
-            this.showTable = false;
+            if (res['success']) {
+              swalWithBootstrapButtons.fire(
+                'Success!',
+                'Booking Successfully Added',
+                'success'
+              );
+              this.roomBookingForm.reset();
+              this.submitted=false;
+              this.showTable = false;
+            } else {
+              this.sweetAlerts.errorAlerts('Already Booked!', 'Student has already allocated a room in the selected dates');
+              return;
+            }
+
           }
         ).catch(err => {
           console.log(err);

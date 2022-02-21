@@ -20,7 +20,7 @@ export class BookingService {
     return this.http.get(`${this.baseUrl}/room/${genderType}`);
   }
 
-  addNewBooking(newBookingData: Object): Observable<any> {
+  addNewBooking(newBookingData: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/booking/`, newBookingData);
   }
 

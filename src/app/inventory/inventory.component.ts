@@ -26,21 +26,20 @@ export class InventoryComponent implements OnInit {
         console.log(err);
       }
     );
-    if(this.rooms['success']){
+    if (this.rooms['success']) {
       this.tempRoom = this.rooms['data'];
     }
 
     await this.roomService.getBlock().toPromise().then(
       res => {
         this.block = res;
-        // console.log(res);
       }
     ).catch(
       err => {
         console.log(err);
       }
     );
-    if(this.block['success']){
+    if (this.block['success']) {
       this.tempBlock = this.block['data'];
     }
 
