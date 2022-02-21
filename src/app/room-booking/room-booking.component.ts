@@ -21,6 +21,8 @@ export class RoomBookingComponent implements OnInit {
   blockId = [];
   today = new Date();
   today1;
+  payment;
+  nodays;
 
   constructor(private bookingService: BookingService,
               private tokenStorageService: TokenStorageService,
@@ -111,7 +113,13 @@ export class RoomBookingComponent implements OnInit {
       });
       return;
     }
-
+    const one_day = 24 * 60 * 60 * 1000;
+    const firstDate = new Date(this.roomBookingForm.value.startDate);
+    const secondDate = new Date(this.roomBookingForm.value.endDate);
+    // @ts-ignore
+    const noOfdate = Math.round(Math.abs((secondDate - firstDate) / one_day));
+    this.nodays = noOfdate;
+    this.payment = 10*noOfdate;
 
     if (this.roomBookingForm.value.startDate > this.roomBookingForm.value.endDate) {
       this.roomBookingForm.controls['endDate'].setErrors({
@@ -171,8 +179,7 @@ export class RoomBookingComponent implements OnInit {
         );
 
       }
-    }
-    else {
+    } else {
       await this.bookingService.getAvailableRooms(this.roomBookingForm.value).toPromise().then(
         res => {
           if (res['success']) {
@@ -195,8 +202,6 @@ export class RoomBookingComponent implements OnInit {
         }
       );
     }
-
-
 
 
   }
@@ -226,8 +231,8 @@ export class RoomBookingComponent implements OnInit {
             roomId: roomID,
             startDate: this.roomBookingForm.value.startDate,
             endDate: this.roomBookingForm.value.endDate,
-            payment: 1000.00,
-            totalyPaid: 0.00,
+            payment: this.payment,
+            totalyPaid: 'no',
             status: 'active',
             uniID: this.roomBookingForm.value.sID,
           };
@@ -236,8 +241,8 @@ export class RoomBookingComponent implements OnInit {
             roomId: roomID,
             startDate: this.roomBookingForm.value.startDate,
             endDate: this.roomBookingForm.value.endDate,
-            payment: 1000.00,
-            totalyPaid: 0.00,
+            payment: this.payment,
+            totalyPaid: 'no',
             status: 'active',
             uniID: localStorage.getItem('userID')
           };
@@ -253,7 +258,7 @@ export class RoomBookingComponent implements OnInit {
                 'success'
               );
               this.roomBookingForm.reset();
-              this.submitted=false;
+              this.submitted = false;
               this.showTable = false;
             } else {
               this.sweetAlerts.errorAlerts('Already Booked!', 'Student has already allocated a room in the selected dates');

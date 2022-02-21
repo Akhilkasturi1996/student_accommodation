@@ -20,4 +20,28 @@ export class RoomService {
     return this.http.get(`${this.baseUrl}/room/get-block/`);
   }
 
+  createBlock(newBlock: Object): Observable<any> {
+    return this.http.post(`${this.baseUrl}/room/add-new-block`, newBlock);
+  }
+
+  createRoom(newRoom: Object): Observable<any> {
+    return this.http.post(`${this.baseUrl}/room/add-new-room`, newRoom);
+  }
+
+  updateRoombyId(updatedRoomDate: Object): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/room/update-room`, updatedRoomDate);
+  }
+
+  deleteRoomById(deleteRoom: any): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/room/delete-room`, deleteRoom);
+  }
+
+  updateBlockById(updateBlockData: Object): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/room/update-block`, updateBlockData);
+  }
+
+  deleteBlockById(deleteBlock: Object): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/room/delete-block`, deleteBlock);
+  }
+
 }

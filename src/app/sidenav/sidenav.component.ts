@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MatMenuItem} from '@angular/material/menu';
+import {FormControl, Validators} from '@angular/forms';
+import {TokenStorageService} from '../services/tokenStorage/token-storage.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,27 +11,31 @@ import {MatMenuItem} from '@angular/material/menu';
 export class SidenavComponent implements OnInit {
   submenu = '';
   tempmenu = '';
+  isAdmin = false;
+  userType= 'student';
   @Input() showText = false;
 
-  constructor() {
+  constructor(private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit(): void {
-
+    this.userType = this.tokenStorageService.getUser();
+    if (this.userType === 'admin') {
+      this.isAdmin = true;
+    } else {
+      this.isAdmin = false;
+    }
   }
 
   clickMenuItem(menuItem: string) {
     this.submenu = menuItem;
-    if (this.tempmenu === this.submenu){
+    if (this.tempmenu === this.submenu) {
       this.submenu = '';
       this.tempmenu = '';
-    }
-    else {
+    } else {
       this.tempmenu = this.submenu;
     }
   }
-
-
 
 
 }
