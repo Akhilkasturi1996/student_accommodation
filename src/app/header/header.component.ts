@@ -13,29 +13,33 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router, private authenticateService: AuthenticationService,
               private tokenStorageService: TokenStorageService,
-              private registrationService: RegistrationService) { }
+              private registrationService: RegistrationService) {
+  }
 
-  userName ='guest';
+  userName = 'guest';
 
   ngOnInit(): void {
     if (this.authenticateService.isAuthenticate) {
       this.registrationService.getUserByUniId(localStorage.getItem('userID')).subscribe(res => {
-        this.userName = res['data']['firstName'];
-      },
+          if (res['success']) {
+            this.userName = res['data']['firstName'];
+          } else {
+            this.userName = 'guest';
+            this.tokenStorageService.signOut();
+          }
+
+        },
         err => {
           console.log(err);
         }
       );
     } else {
-      this.userName = 'guest';
-      this.tokenStorageService.signOut();
     }
   }
 
 
-
   // tslint:disable-next-line:typedef
-  logout(){
+  logout() {
     this.authenticateService.isAuthenticate = false;
     this.tokenStorageService.signOut();
     this.router.navigate(['login']);

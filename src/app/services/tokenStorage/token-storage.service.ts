@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {RegistrationService} from '../Registration/registration.service';
+import {Router} from '@angular/router';
 
 const TOKEN_KEY = 'token';
 const USER_ROLE = 'role';
@@ -9,15 +10,16 @@ const USER_ROLE = 'role';
 })
 export class TokenStorageService {
 
-  constructor(private registrationService: RegistrationService) {
+  constructor(private registrationService: RegistrationService,
+              private router: Router) {
   }
 
   signOut() {
     window.localStorage.removeItem(TOKEN_KEY);
     window.localStorage.clear();
-
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.clear();
+    this.router.navigate(['login']);
   }
 
   saveToken(token: string) {
