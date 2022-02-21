@@ -64,17 +64,17 @@
           <tr>
             <th>No.</th>
             <th>Block Name</th>
-            <th>Room No.</th>
-            <th>Status</th>
+            <th>Block No.</th>
+            <th>Gender Type</th>
             <th colspan="2">Action</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let room of rooms['data'];let j=index">
+          <tr *ngFor="let block of tempBlock;let j=index">
             <th>{{j + 1}}</th>
-            <td>{{room['blockName']}}</td>
-            <td>{{room['roomNo']}}</td>
-            <td>Active</td>
+            <td>{{block['blockName']}}</td>
+            <td>{{block['blockNO']}}</td>
+            <td>{{block['genderType'].toUpperCase()}}</td>
             <td>
               <button type="button" class="btn btn-warning">Update</button>
             </td>

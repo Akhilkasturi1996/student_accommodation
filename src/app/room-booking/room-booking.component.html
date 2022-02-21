@@ -54,7 +54,13 @@
             </div>
 
             <div class="col-sm-6">
-              <input type="text" class="form-control" name="sid" value="" id="sid" formControlName="sID">
+              <input type="text" class="form-control" name="sid" value="" id="sid" formControlName="sID"
+                     [ngClass]="{'is-invalid': submitted && r.sID.errors}"/>
+              <div *ngIf="r.sID.errors" class="invalid-feedback mt-2">
+                <div *ngIf="r.sID.errors.required">
+                  Please Enter a Student ID
+                </div>
+              </div>
             </div>
           </div>
 
@@ -97,7 +103,7 @@
           </div>
         </form>
         <!--    *ngIf="!showTable"-->
-        <div class="row table-div">
+        <div *ngIf="showTable" class="row table-div">
           <table class="table mt-4 ml-4">
             <thead>
             <tr>
