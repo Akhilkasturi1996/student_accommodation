@@ -27,6 +27,9 @@ import {RoomBookingComponent} from './room-booking/room-booking.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { PopUpModelComponent } from './room-booking/PopUp Model/pop-up-model/pop-up-model.component';
 import { BookingHistoryComponent } from './room-booking/booking-history/booking-history/booking-history.component';
+import { ProfileComponent } from './profile/profile.component';
+import { UserAccountUpdateComponent } from './user-account-update/user-account-update.component';
+import { UserAccountActivateComponent } from './user-account-activate/user-account-activate.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { BookingHistoryComponent } from './room-booking/booking-history/booking-
     RoomBookingComponent,
     InventoryComponent,
     PopUpModelComponent,
-    BookingHistoryComponent
+    BookingHistoryComponent,
+    ProfileComponent,
+    UserAccountUpdateComponent,
+    UserAccountActivateComponent
 
   ],
   imports: [
