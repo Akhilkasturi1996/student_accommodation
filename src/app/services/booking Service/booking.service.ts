@@ -24,5 +24,8 @@ export class BookingService {
     return this.http.post(`${this.baseUrl}/booking/`, newBookingData);
   }
 
+  getBookingByUniID(uniID: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/booking/${uniID}`);
+  }
 }
 

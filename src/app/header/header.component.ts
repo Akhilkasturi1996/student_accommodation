@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
             this.userName = res['data']['firstName'];
           } else {
             this.userName = 'guest';
+            this.authenticateService.isAuthenticate=false;
             this.tokenStorageService.signOut();
           }
 

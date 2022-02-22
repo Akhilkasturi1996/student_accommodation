@@ -1,0 +1,49 @@
+<div class="container-fluid px-0">
+  <div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2 dash">Booking History</div>
+    <div class="page__content shadow p-3 position-relative">
+
+      <form [formGroup]="shistoryForm">
+        <div *ngIf="isAdmin" class="row mt-4">
+          <div class="col-sm-3">
+            <label>Student ID</label>
+          </div>
+          <div class="col-sm-6">
+            <input formControlName="stdId" class="form-control">
+          </div>
+          <div class="col-sm-2 ml-3">
+            <button (click)="getStudentId()" type="button" class="btn btn-primary" >Search</button>
+          </div>
+        </div>
+
+        <div *ngIf="showTable" class="row table-div pr-2">
+          <table class="table mt-4 ml-4">
+            <thead>
+            <tr>
+              <th>No.</th>
+              <th>Block Name</th>
+              <th>Room No.</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Amount To be Paid</th>
+              <th>status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let sh of studentHistory;let j=index">
+              <td>{{j + 1}}</td>
+              <td>{{sh.blockName}}</td>
+              <td>{{sh.roomNo}}</td>
+              <td>{{sh.startDate | date:'yyyy-MM-dd' }}</td>
+              <td>{{sh.endDate  | date:'yyyy-MM-dd' }}</td>
+              <td>{{sh.payment}}</td>
+              <td>{{sh.status}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
