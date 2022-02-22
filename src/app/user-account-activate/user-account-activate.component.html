@@ -1,0 +1,85 @@
+<div class="container-fluid px-0">
+  <div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2 dash">User Accounts</div>
+    <div class="page__content shadow p-3 position-relative">
+
+      <form>
+        <div class="row mt-4">
+          <div class="col-sm-4">
+            <label>Student ID</label>
+          </div>
+          <div class="col-sm-8">
+            <input class="form-control">
+          </div>
+        </div>
+
+        <div class="row table-div pr-2">
+          <table class="table mt-4 ml-4">
+            <thead>
+            <tr>
+              <th>No.</th>
+              <th>University ID</th>
+              <th>Account Type</th>
+              <th>Profile Status</th>
+              <th colspan="2">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let u of userData;let j=index">
+              <td>{{j + 1}}</td>
+              <td>{{u.username}}</td>
+              <td>{{u.status}}</td>
+              <td>{{u.role }}</td>
+              <td><button (click)="updateStatus(u)" class="btn btn-info">{{u.status!=='active' ? 'Active':' Inactive '}}</button></td>
+              <td><button (click)="assignData(u)" class="btn btn-success">Update</button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+
+      <form *ngIf="showTable"  [formGroup]="LoginForm">
+        <div class="mt-4">
+          <h2>{{user.username.toUpperCase()}}'S Account</h2>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>University ID</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="text"  formControlName="username"
+                   class="form-control" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>Password</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="password"  formControlName="password"
+                   class="form-control" />
+          </div>
+        </div>
+
+
+        <div class="row form-group mt-3">
+          <div class="col-sm-8">
+
+          </div>
+          <div class="col-sm-2">
+            <button (click)="updatePassword()" [disabled]="loading" class="btn btn-warning">
+              <span *ngIf="loading"  class="spinner-border spinner-border-sm mr-1"></span>
+              Update
+            </button>
+          </div>
+          <div class="col-sm-2">
+            <a (click)="close()"  class="btn btn-link">Cancel</a>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

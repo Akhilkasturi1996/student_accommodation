@@ -1,0 +1,236 @@
+<div class="container-fluid px-0">
+  <div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2 dash">User Profiles</div>
+    <div class="page__content shadow p-3 position-relative">
+
+      <form>
+        <div class="row mt-4">
+          <div class="col-sm-4">
+            <label>Student ID</label>
+          </div>
+          <div class="col-sm-8">
+            <input class="form-control">
+          </div>
+        </div>
+
+        <div class="row table-div pr-2">
+          <table class="table mt-4 ml-4">
+            <thead>
+            <tr>
+              <th>No.</th>
+              <th>University ID</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Profile Status</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let u of userData;let j=index">
+              <td>{{j + 1}}</td>
+              <td>{{u.uniID}}</td>
+              <td>{{u.firstName}}</td>
+              <td>{{u.lastName }}</td>
+              <td>{{u.profile }}</td>
+              <td><button (click)="assignData(u)" class="btn btn-success">Update</button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+
+      <form *ngIf="showTable"  [formGroup]="registrationForm">
+        <div class="mt-4">
+          <h2>{{user.firstName.toUpperCase()}}'S Profile ({{user.uniID}})</h2>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>First Name</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="text" placeholder="Enter First Name Here.." formControlName="firstName"
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+              <div *ngIf="f.firstName.errors.required">
+                Please Enter First Name.
+              </div>
+              <div *ngIf="f.firstName.errors.minlength">
+                First Name requied atleast 3 characters.
+              </div>
+              <div *ngIf="f.firstName.errors.maxlength">
+                First Name requied only 30 characters
+              </div>
+              <div *ngIf="f.firstName.errors.pattern">
+                Only characters are allowed.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>Last Name</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="text" placeholder="Enter Last Name Here.." formControlName="lastName"
+                   class="form-control"/>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-sm-4">
+            <label>Address</label>
+          </div>
+          <div class="col-sm-8">
+                              <textarea placeholder="Enter Address Here.." rows="2" formControlName="address"
+                                        class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+          </textarea>
+            <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+              <div *ngIf="f.address.errors.required">
+                Please Enter Address.
+              </div>
+              <div *ngIf="f.address.errors.maxlength">
+                Only 255 characters are allowed.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row form-group">
+          <div class="col-sm-4">
+            <label>Phone Number</label>
+          </div>
+
+          <div class="col-sm-8">
+            <input type="text" placeholder="Enter Phone Number Here.." formControlName="telno"
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.telno.errors }"/>
+            <div *ngIf="submitted && f.telno.errors" class="invalid-feedback">
+              <div *ngIf="f.telno.errors.required">
+                Please Enter Phone Number.
+              </div>
+              <div *ngIf="f.telno.errors.minlength">
+                Phone Number required atleast 8 characters.
+              </div>
+              <div *ngIf="f.telno.errors.maxlength">
+                Phone Number required only 12 characters.
+              </div>
+              <div *ngIf="f.telno.errors.pattern">
+                Only Numbers are allowed.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-sm-4">
+            <label>Gender</label>
+          </div>
+
+          <div class="col-sm-8">
+            <select class="form-control" formControlName="gender"
+                    [ngClass]="{'is-invalid': submitted && f.gender.errors}">
+              <option value='male'>Male</option>
+              <option value='female'>Female</option>
+            </select>
+            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+              <div>Please Select your gender</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-sm-4">
+            <label>Account Type</label>
+          </div>
+          <div class="col-sm-8">
+            <select class="form-control" formControlName="role">
+              <option value='student'>Student Account</option>
+              <option value='admin'>Admin Account</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-3 form-group">
+          <div class="col-sm-4">
+            <label>Email Address</label>
+          </div>
+          <div class="col-sm-8">
+            <input type="text" placeholder="Enter Email Address Here.." formControlName="email"
+                   class="form-control" [ngClass]="{'is-invalid': submitted && f.email.errors}"/>
+            <div *ngIf="f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">
+                Please Enter Email.
+              </div>
+              <div *ngIf="f.email.errors.minlength">
+                The email requied atleast 5 characters.
+              </div>
+              <div *ngIf="f.email.errors.maxlength">
+                The email requied only 80 characters.
+              </div>
+              <div *ngIf="f.email.errors.pattern">
+                The Email is not valid.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-sm-4">
+            <label *ngIf="acctype==='student'">Student ID</label>
+            <label *ngIf="acctype==='admin'">Staff ID</label>
+          </div>
+
+          <div class="col-sm-8">
+            <input type="text" placeholder="DHD123456789" formControlName="uniID"
+                   class="form-control" [ngClass]="{'is-invalid':submitted && f.uniID.errors}"/>
+            <div *ngIf="f.uniID.errors" class="invalid-feedback">
+              <div *ngIf="f.uniID.errors.required">
+                Please Enter Univeristy ID.
+              </div>
+              <div *ngIf="f.uniID.errors.minlength">
+                The Univeristy ID requied atleast 10 characters.
+              </div>
+              <div *ngIf="f.uniID.errors.maxlength">
+                The Univeristy ID requied only 15 characters.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-sm-4">
+            <label>Profile Status</label>
+          </div>
+          <div class="col-sm-8">
+            <select class="form-control" formControlName="profile">
+              <option value="pending">Pending</option>
+              <option value="verified">Verified</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row form-group mt-3">
+          <div class="col-sm-8">
+
+          </div>
+          <div class="col-sm-2">
+            <button (click)="onSubmit()" [disabled]="loading" class="btn btn-warning">
+              <span *ngIf="loading"  class="spinner-border spinner-border-sm mr-1"></span>
+              Verify
+            </button>
+          </div>
+          <div class="col-sm-2">
+            <a (click)="close()"  class="btn btn-link">Cancel</a>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

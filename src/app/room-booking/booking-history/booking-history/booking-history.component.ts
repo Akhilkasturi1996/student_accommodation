@@ -29,7 +29,6 @@ export class BookingHistoryComponent implements OnInit {
   ngOnInit(): void {
     this.showTable = false;
     this.userType = this.tokenStorageService.getUser();
-    // this.showTable = false;
     if (this.userType === 'admin') {
       this.isAdmin = true;
     } else {

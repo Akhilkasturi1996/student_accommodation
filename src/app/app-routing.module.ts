@@ -9,6 +9,9 @@ import {CheckRoomComponent} from './check-room/check-room.component';
 import {RoomBookingComponent} from './room-booking/room-booking.component';
 import {InventoryComponent} from './inventory/inventory.component';
 import {BookingHistoryComponent} from './room-booking/booking-history/booking-history/booking-history.component';
+import {ProfileComponent} from './profile/profile.component';
+import {UserAccountUpdateComponent} from './user-account-update/user-account-update.component';
+import {UserAccountActivateComponent} from './user-account-activate/user-account-activate.component';
 
 
 const routes: Routes = [
@@ -21,6 +24,9 @@ const routes: Routes = [
   { path: 'newBooking', component: RoomBookingComponent, canActivate: [AuthGuard]},
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard]},
   { path: 'booking-history', component: BookingHistoryComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'user-account-update', component: UserAccountUpdateComponent, canActivate: [AuthGuard]},
+  { path: 'user-account-activate', component: UserAccountActivateComponent, canActivate: [AuthGuard]},
 
   {
     path: 'login',
