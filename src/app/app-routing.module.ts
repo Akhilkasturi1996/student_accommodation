@@ -8,6 +8,7 @@ import {RegistrationComponent} from './registration/registration.component';
 import {CheckRoomComponent} from './check-room/check-room.component';
 import {RoomBookingComponent} from './room-booking/room-booking.component';
 import {InventoryComponent} from './inventory/inventory.component';
+import {BookingHistoryComponent} from './room-booking/booking-history/booking-history/booking-history.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'checkAvailability', component: CheckRoomComponent, canActivate: [AuthGuard]},
   { path: 'newBooking', component: RoomBookingComponent, canActivate: [AuthGuard]},
   { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard]},
+  { path: 'booking-history', component: BookingHistoryComponent, canActivate: [AuthGuard]},
 
   {
     path: 'login',

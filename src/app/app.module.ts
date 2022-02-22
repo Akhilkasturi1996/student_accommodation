@@ -26,6 +26,7 @@ import {CheckRoomComponent} from './check-room/check-room.component';
 import {RoomBookingComponent} from './room-booking/room-booking.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { PopUpModelComponent } from './room-booking/PopUp Model/pop-up-model/pop-up-model.component';
+import { BookingHistoryComponent } from './room-booking/booking-history/booking-history/booking-history.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PopUpModelComponent } from './room-booking/PopUp Model/pop-up-model/pop
     CheckRoomComponent,
     RoomBookingComponent,
     InventoryComponent,
-    PopUpModelComponent
+    PopUpModelComponent,
+    BookingHistoryComponent
 
   ],
   imports: [
