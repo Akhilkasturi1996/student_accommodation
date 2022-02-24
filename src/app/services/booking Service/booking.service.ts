@@ -16,6 +16,10 @@ export class BookingService {
     return this.http.post(`${this.baseUrl}/room/check-room`, userdata);
   }
 
+  getPendingBookings(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/booking/`);
+  }
+
   getBlockByGender(genderType: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/room/${genderType}`);
   }
@@ -26,6 +30,10 @@ export class BookingService {
 
   getBookingByUniID(uniID: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/booking/${uniID}`);
+  }
+
+  updateBookingStatus(userData: any): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/booking/update-status`, userData);
   }
 }
 

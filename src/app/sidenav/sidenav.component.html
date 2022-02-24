@@ -28,6 +28,12 @@
     <a *ngIf="'booking'===submenu" mat-list-item routerLinkActive="list-item-active" routerLink="/booking-history">
       <mat-icon>dvr</mat-icon> <span *ngIf="showText"> Booking History </span>
     </a>
+
+    <div *ngIf="isAdmin">
+      <a *ngIf="'booking'===submenu" mat-list-item routerLinkActive="list-item-active" routerLink="/booking-confirm">
+        <mat-icon>recommend</mat-icon> <span *ngIf="showText"> Booking Confirmation </span>
+      </a>
+    </div>
   </div>
 
   <a mat-list-item routerLinkActive="list-item-active"
@@ -51,7 +57,7 @@
 
 
   <a *ngIf="!isAdmin" mat-list-item routerLinkActive="list-item-active"
-     (click)="clickMenuItem('payment')" routerLink="/payment">
+     (click)="clickMenuItem('payment')" routerLink="/student-payment">
     <mat-icon>payment</mat-icon> <span *ngIf="showText"> Payment </span>
   </a>
 

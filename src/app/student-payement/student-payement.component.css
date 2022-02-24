@@ -25,17 +25,3 @@ table th{
 .notification{
   font-size: medium;
 }
-
-.container{
-  position: absolute;
-  top: 10%;
-  left: 40px;
-}
-
-.model{
-  position: absolute;
-  max-width: 100vh;
-  width: 80%;
-  /*min-width: 60vh;*/
-  z-index: 2;
-}

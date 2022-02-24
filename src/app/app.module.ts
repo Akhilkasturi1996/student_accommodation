@@ -30,6 +30,9 @@ import { BookingHistoryComponent } from './room-booking/booking-history/booking-
 import { ProfileComponent } from './profile/profile.component';
 import { UserAccountUpdateComponent } from './user-account-update/user-account-update.component';
 import { UserAccountActivateComponent } from './user-account-activate/user-account-activate.component';
+import { StudentPayementComponent } from './student-payement/student-payement.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,9 @@ import { UserAccountActivateComponent } from './user-account-activate/user-accou
     BookingHistoryComponent,
     ProfileComponent,
     UserAccountUpdateComponent,
-    UserAccountActivateComponent
+    UserAccountActivateComponent,
+    StudentPayementComponent,
+    BookingConfirmComponent
 
   ],
   imports: [
@@ -65,6 +70,7 @@ import { UserAccountActivateComponent } from './user-account-activate/user-accou
     MatIconModule,
     MatDividerModule,
     MatListModule,
+    MatProgressSpinnerModule,
   ],
   providers: [authInterceptorProviders,
     DatePipe
