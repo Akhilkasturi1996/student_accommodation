@@ -26,6 +26,13 @@ import {CheckRoomComponent} from './check-room/check-room.component';
 import {RoomBookingComponent} from './room-booking/room-booking.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { PopUpModelComponent } from './room-booking/PopUp Model/pop-up-model/pop-up-model.component';
+import { BookingHistoryComponent } from './room-booking/booking-history/booking-history/booking-history.component';
+import { ProfileComponent } from './profile/profile.component';
+import { UserAccountUpdateComponent } from './user-account-update/user-account-update.component';
+import { UserAccountActivateComponent } from './user-account-activate/user-account-activate.component';
+import { StudentPayementComponent } from './student-payement/student-payement.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { BookingConfirmComponent } from './booking-confirm/booking-confirm.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +46,13 @@ import { PopUpModelComponent } from './room-booking/PopUp Model/pop-up-model/pop
     CheckRoomComponent,
     RoomBookingComponent,
     InventoryComponent,
-    PopUpModelComponent
+    PopUpModelComponent,
+    BookingHistoryComponent,
+    ProfileComponent,
+    UserAccountUpdateComponent,
+    UserAccountActivateComponent,
+    StudentPayementComponent,
+    BookingConfirmComponent
 
   ],
   imports: [
@@ -57,6 +70,7 @@ import { PopUpModelComponent } from './room-booking/PopUp Model/pop-up-model/pop
     MatIconModule,
     MatDividerModule,
     MatListModule,
+    MatProgressSpinnerModule,
   ],
   providers: [authInterceptorProviders,
     DatePipe

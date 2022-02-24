@@ -19,6 +19,10 @@
             >
           </button>
           <mat-menu #menu="matMenu">
+            <button (click)="profile()" mat-menu-item>
+              <mat-icon>account_circle</mat-icon>
+              Profile
+            </button>
             <button (click)="logout()" mat-menu-item>
               <mat-icon>exit_to_app</mat-icon>
               Logout

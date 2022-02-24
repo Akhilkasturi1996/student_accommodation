@@ -1,5 +1,15 @@
 @import "../home/home.component.css";
 
+.dash{
+  background: radial-gradient(#1fe4f5, #3fbafe);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 table {
   width: 90%;
   text-align: center;

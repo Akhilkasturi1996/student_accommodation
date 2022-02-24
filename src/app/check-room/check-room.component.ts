@@ -44,8 +44,8 @@ export class CheckRoomComponent implements OnInit {
       this.isAdmin = true;
     } else {
       this.isAdmin = false;
+      this.getBlockByGenderId();
     }
-    this.getBlockByGenderId();
   }
 
   getBlockByGenderIdforAdmin(e: any) {

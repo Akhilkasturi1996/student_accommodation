@@ -1,0 +1,51 @@
+<div class="container-fluid px-0">
+  <div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2 dash">User Accounts</div>
+    <div class="page__content shadow p-3 position-relative">
+
+
+      <form>
+        <div class="row mt-4">
+          <div class="col-sm-4">
+            <label>Student ID</label>
+          </div>
+          <div class="col-sm-8">
+            <input (keyup)="filterTableData($event.target)" class="form-control">
+          </div>
+        </div>
+        <div class="row table-div pr-2">
+          <table class="table mt-4 ml-4">
+            <thead>
+            <tr>
+              <th>No.</th>
+              <th>Student ID</th>
+              <th>Block ID</th>
+              <th>Room No</th>
+              <th>Start Date</th>
+              <th>End Date Date</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th colspan="2">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let u of tempUserData;let j=index">
+              <td>{{j + 1}}</td>
+              <td>{{u.uniID}}</td>
+              <td>{{u.blockID}}</td>
+              <td>{{u.roomNo}}</td>
+              <td>{{u.startDate | date:'yyyy-MM-dd' }}</td>
+              <td>{{u.endDate | date:'yyyy-MM-dd' }}</td>
+              <td>{{u.payment }}</td>
+              <td>PENDING</td>
+              <td><button (click)="confirmBooking(u.bookingID)" class="btn btn-primary">Confirm</button></td>
+              <td><button (click)="rejectBooking(u.bookingID)" class="btn btn-danger">Reject</button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

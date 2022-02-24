@@ -62,7 +62,7 @@ color: white;
 }
 
 .sub-menus .list-item-active ::ng-deep .mat-list-item-content {
-  background: #05485a !important;
+  background: #036079 !important;
 }
 
 @media screen and (max-width: 750px) {
