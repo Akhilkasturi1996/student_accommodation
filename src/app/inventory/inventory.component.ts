@@ -184,7 +184,6 @@ export class InventoryComponent implements OnInit {
   }
 
   async deleteRoom(roomId: number) {
-    this.roomID = {roomID: roomId};
     let bookings;
     await this.bookingService.getAllBookings().toPromise().then(res => {
       if (res['success']) {
@@ -214,7 +213,7 @@ export class InventoryComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.roomService.deleteRoomById(this.roomID).subscribe(res => {
+        this.roomService.deleteRoomById(roomId).subscribe(res => {
             if (res['success']) {
               this.getRooms();
               Swal.fire(
@@ -231,7 +230,7 @@ export class InventoryComponent implements OnInit {
     });
   }
 
-  async deleteBlock(blockid:number) {
+  async deleteBlock(blockid: number) {
 
     let bookings;
     await this.bookingService.getAllBookings().toPromise().then(res => {
@@ -242,6 +241,14 @@ export class InventoryComponent implements OnInit {
       console.log(err);
     });
 
+    let roomExists = this.tempRoom.filter(e => {
+      return e.blockID === blockid;
+    });
+
+    if (roomExists.length > 0) {
+      this.sweetAlert.errorAlerts('Unable to Delete', 'There is a Rooms created using in this Block');
+      return;
+    }
 
     let exists = bookings.filter(e => {
       return e.blockID === blockid;
@@ -264,6 +271,7 @@ export class InventoryComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.roomService.deleteBlockById(Number(blockid)).subscribe(res => {
+            console.log(res);
             if (res['success']) {
               this.getBlock();
               Swal.fire(

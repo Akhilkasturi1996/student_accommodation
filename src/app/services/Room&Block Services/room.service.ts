@@ -32,16 +32,16 @@ export class RoomService {
     return this.http.patch(`${this.baseUrl}/room/update-room`, updatedRoomDate);
   }
 
-  deleteRoomById(deleteRoom: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/room/delete-room/${deleteRoom}`, deleteRoom);
+  deleteRoomById(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/room/delete-room/${id}`);
   }
 
   updateBlockById(updateBlockData: Object): Observable<any> {
     return this.http.patch(`${this.baseUrl}/room/update-block`, updateBlockData);
   }
 
-  deleteBlockById(deleteBlock: Object): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/room/delete-block/${deleteBlock}`, deleteBlock);
+  deleteBlockById(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/room/delete-block/${id}`);
   }
 
 }
