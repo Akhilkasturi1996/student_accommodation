@@ -5,7 +5,7 @@
   font-weight: 500;
 }
 
-form, .selected-date,table{
+form, .selected-date,table, label{
   font-size: large;
   font-weight: 500;
 }

@@ -94,6 +94,7 @@ export class PopUpModelComponent implements OnInit {
     this.blockHidden = !this.blockHidden;
     this.BlockForm.reset();
     this.submitted = false;
+    this.getBlock();
   }
 
   sendCreateRoomData() {
