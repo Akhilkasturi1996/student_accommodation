@@ -31,12 +31,12 @@ export class PopUpModelComponent implements OnInit {
   BlockForm = new FormGroup({
     blockNo: new FormControl('', [Validators.required]),
     blockName: new FormControl('', [Validators.required]),
-    genderType: new FormControl('male')
+    genderType: new FormControl('', [Validators.required])
   });
 
   RoomForm = new FormGroup({
     roomNo: new FormControl('', [Validators.required]),
-    status: new FormControl('active'),
+    status: new FormControl('active' , [Validators.required]),
     blockID: new FormControl('', [Validators.required])
   });
 
@@ -68,6 +68,7 @@ export class PopUpModelComponent implements OnInit {
   }
 
   toggle() {
+    this.reset();
     this.submitted = false;
     this.blockHidden = !this.blockHidden;
     if (this.roomHidden || this.isUpdate) {
@@ -77,12 +78,22 @@ export class PopUpModelComponent implements OnInit {
   }
 
   toggleRoomCreate() {
+    this.reset();
     this.submitted = false;
     this.roomHidden = !this.roomHidden;
     if (this.blockHidden || this.isUpdate) {
       this.blockHidden = false;
       this.isUpdate = false;
     }
+  }
+
+  reset(){
+    this.BlockForm.reset();
+    this.RoomForm.reset();
+    this.RoomForm.get('roomNo').enable();
+    this.BlockForm.get('blockNo').enable();
+    this.RoomForm.get('status').setValue('active');
+    this.BlockForm.get('genderType').setValue('male');
   }
 
   sendCreateBlockData() {
@@ -131,6 +142,7 @@ export class PopUpModelComponent implements OnInit {
   }
 
   updateRoomData() {
+
     this.submitted = true;
     if (this.RoomForm.invalid) {
       return;
