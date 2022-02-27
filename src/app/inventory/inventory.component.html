@@ -35,7 +35,7 @@
             <td>{{j + 1}}</td>
             <td>{{room['blockName']}}</td>
             <td>{{room['roomNo']}}</td>
-            <td>Active</td>
+            <td>{{room['status'] | uppercase}}</td>
             <td>
               <button (click)="updateRoom(room)" type="button" class="btn btn-warning">Update</button>
             </td>

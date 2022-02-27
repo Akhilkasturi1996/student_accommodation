@@ -143,15 +143,6 @@ export class InventoryComponent implements OnInit {
   }
 
   updateRooms(e: any) {
-    for (let i = 0; i < this.rooms['data'].length; i++) {
-      if (e.blockID === this.rooms['data'][i]['blockID']) {
-        if (Number(e.roomNo) === this.rooms['data'][i]['roomNo']) {
-          this.sweetAlert.errorAlerts('Cannot Save', 'Room No and Room Name Already Assigned to Block');
-          return;
-        }
-      }
-    }
-
     this.roomService.updateRoombyId(e).subscribe(res => {
         if (res['success']) {
           this.getRooms();

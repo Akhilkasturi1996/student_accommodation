@@ -123,7 +123,8 @@
                 <label>Room Status</label>
               </div>
               <div class="col-sm-6">
-                <select type="text" class="form-control" formControlName="status">
+                <select type="text" class="form-control" formControlName="status"
+                        [ngClass]="{'is-invalid': submitted && r.status.errors}">
                   <option value="active">Active</option>
                   <option value="inactive">Inactive</option>
                 </select>
