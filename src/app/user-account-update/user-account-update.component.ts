@@ -40,6 +40,7 @@ export class UserAccountUpdateComponent implements OnInit {
   userData = null;
   acctype = 'student';
   loading = false;
+  tempUserData = null;
 
    ngOnInit() {
     this.getData();
@@ -51,8 +52,8 @@ export class UserAccountUpdateComponent implements OnInit {
         console.log(res);
         if (res['success']) {
           this.userData = res['data'];
+          this.tempUserData = this.userData;
         }
-        console.log(this.userData);
         // this.assignData();
       }
     ).catch(
@@ -60,6 +61,21 @@ export class UserAccountUpdateComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  filterTableData(values: any) {
+
+    if (values.value.trim() === '') {
+      this.tempUserData = this.userData;
+      return;
+    }
+    let value = values.value;
+    this.tempUserData = [];
+    this.userData.forEach(e => {
+      if (e.uniID.toLowerCase().includes(value.toLowerCase())) {
+        this.tempUserData.push(e);
+      }
+    });
   }
 
 
