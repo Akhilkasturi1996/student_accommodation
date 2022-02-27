@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
         Validators.maxLength(80),
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ]),
-      uniID: new FormControl('', [
+      uniID: new FormControl({value: '', disabled: true}, [
         Validators.required,
         Validators.minLength(10),
         Validators.maxLength(15)

@@ -21,6 +21,7 @@ export class CheckRoomComponent implements OnInit {
   blockId = [];
   today = new Date();
   today1;
+  gender = 'male';
 
   constructor(private tokenStorageService: TokenStorageService,
               private bookingService: BookingService,
@@ -42,6 +43,7 @@ export class CheckRoomComponent implements OnInit {
     this.showTable = false;
     if (this.userType === 'admin') {
       this.isAdmin = true;
+      this.getBlockByGenderIdforAdmin({value:1});
     } else {
       this.isAdmin = false;
       this.getBlockByGenderId();
@@ -49,17 +51,15 @@ export class CheckRoomComponent implements OnInit {
   }
 
   getBlockByGenderIdforAdmin(e: any) {
-    let gentype;
-    if (e.value == 1) {
-      gentype = 'male';
+    if (Number(e.value) === 1) {
+      this.gender = 'male';
     } else {
-      gentype = 'female';
+      this.gender = 'female';
     }
 
     this.blockId = [];
-    this.bookingService.getBlockByGender(gentype).subscribe(
+    this.bookingService.getBlockByGender(this.gender).subscribe(
       res => {
-        console.log(res);
         if (res['data'].length > 0) {
           const room = res['data'];
           // tslint:disable-next-line:prefer-for-of

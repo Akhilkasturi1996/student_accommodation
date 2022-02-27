@@ -13,12 +13,13 @@ export class UserAccountActivateComponent implements OnInit {
   constructor(private regService: RegistrationService,
               private sweetAlerts: SweetAlertsService) {
   }
-
+  userID = null;
   userData = null;
   user = null;
   submitted = false;
   loading = false;
   showTable = false;
+  tempUserData= null;
 
   LoginForm = new FormGroup({
     userID: new FormControl(''),
@@ -27,6 +28,7 @@ export class UserAccountActivateComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.userID = localStorage.getItem('userID');
     this.getData();
   }
 
@@ -35,13 +37,33 @@ export class UserAccountActivateComponent implements OnInit {
       res => {
         if (res['success']) {
           this.userData = res['data'];
+          this.userData = this.userData.filter(e => {
+            return e.username !== this.userID;
+          });
+          this.tempUserData = this.userData;
         }
       }
-    ).then(
+    ).catch(
       err => {
         console.log(err);
       }
     );
+  }
+
+  filterTableData(values: any) {
+
+    if (values.value.trim() === '') {
+      this.tempUserData = this.userData;
+      return;
+    }
+    let value = values.value;
+    let roomId = [];
+    this.tempUserData = [];
+    this.userData.forEach(e => {
+      if (e.username.toLowerCase().includes(value.toLowerCase())) {
+        this.tempUserData.push(e);
+      }
+    });
   }
 
   assignData(e) {
@@ -58,7 +80,6 @@ export class UserAccountActivateComponent implements OnInit {
       userID: this.user.userID,
       status: (this.user.status === 'active' ? 'inactive' : 'active')
     };
-    console.log(userData);
     this.regService.updateAccountStatus(userData).toPromise().then(
       res => {
         if (res['success']) {
@@ -66,7 +87,6 @@ export class UserAccountActivateComponent implements OnInit {
           this.sweetAlerts.customSuccessAlert(msg);
           this.getData();
         }
-        console.log(res);
       }
     ).catch(
       err => {

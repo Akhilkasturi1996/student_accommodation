@@ -50,7 +50,7 @@ export class SweetAlertsService {
 
   customSuccessAlert(message: string) {
     Swal.fire({
-      position: 'top-end',
+      position: 'center',
       icon: 'success',
       title: message,
       showConfirmButton: false,

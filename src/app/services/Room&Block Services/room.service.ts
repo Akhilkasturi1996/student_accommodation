@@ -33,7 +33,7 @@ export class RoomService {
   }
 
   deleteRoomById(deleteRoom: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/room/delete-room`, deleteRoom);
+    return this.http.delete(`${this.baseUrl}/room/delete-room/${deleteRoom}`, deleteRoom);
   }
 
   updateBlockById(updateBlockData: Object): Observable<any> {
@@ -41,7 +41,7 @@ export class RoomService {
   }
 
   deleteBlockById(deleteBlock: Object): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/room/delete-block`, deleteBlock);
+    return this.http.delete(`${this.baseUrl}/room/delete-block/${deleteBlock}`, deleteBlock);
   }
 
 }
