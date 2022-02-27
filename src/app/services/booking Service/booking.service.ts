@@ -16,6 +16,10 @@ export class BookingService {
     return this.http.post(`${this.baseUrl}/room/check-room`, userdata);
   }
 
+  getAllBookings(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/booking/get-all-booking`);
+  }
+
   getPendingBookings(): Observable<any> {
     return this.http.get(`${this.baseUrl}/booking/`);
   }

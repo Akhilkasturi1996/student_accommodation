@@ -25,7 +25,7 @@ export class InventoryComponent implements OnInit {
               private sweetAlert: SweetAlertsService) {
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.getRooms();
 
     this.getBlock();
@@ -183,9 +183,27 @@ export class InventoryComponent implements OnInit {
       });
   }
 
-  async deleteRoom(roomId) {
+  async deleteRoom(roomId: number) {
     this.roomID = {roomID: roomId};
-    // this.bookingService.get
+    let bookings;
+    await this.bookingService.getAllBookings().toPromise().then(res => {
+      if (res['success']) {
+        bookings = res['data'];
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+
+
+    let exists = bookings.filter(e => {
+      return e.roomID === roomId;
+    });
+    if (exists.length > 0) {
+      this.sweetAlert.errorAlerts('Unable to Delete', 'There is a Booking in this Room Number');
+      return;
+    }
+
+
     Swal.fire({
       title: 'Are you sure?',
       text: 'You won\'t be able to revert this!',
@@ -213,10 +231,27 @@ export class InventoryComponent implements OnInit {
     });
   }
 
-  async deleteBlock(blockid) {
+  async deleteBlock(blockid:number) {
+
+    let bookings;
+    await this.bookingService.getAllBookings().toPromise().then(res => {
+      if (res['success']) {
+        bookings = res['data'];
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+
+
+    let exists = bookings.filter(e => {
+      return e.blockID === blockid;
+    });
+    if (exists.length > 0) {
+      this.sweetAlert.errorAlerts('Unable to Delete', 'There is a Booking in this Block');
+      return;
+    }
 
     const slBlock = {'blockID': Number(blockid)};
-    console.log(slBlock);
     // this.bookingService.get
     Swal.fire({
       title: 'Are you sure?',
