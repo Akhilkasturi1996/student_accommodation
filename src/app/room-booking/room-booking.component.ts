@@ -233,7 +233,7 @@ export class RoomBookingComponent implements OnInit {
             endDate: this.roomBookingForm.value.endDate,
             payment: this.payment,
             totalyPaid: 'no',
-            status: 'pendig',
+            status: 'pending',
             uniID: this.roomBookingForm.value.sID,
           };
         } else {
@@ -243,7 +243,7 @@ export class RoomBookingComponent implements OnInit {
             endDate: this.roomBookingForm.value.endDate,
             payment: this.payment,
             totalyPaid: 'no',
-            status: 'pendig',
+            status: 'pending',
             uniID: localStorage.getItem('userID')
           };
         }
