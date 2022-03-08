@@ -134,10 +134,15 @@ export class RoomBookingComponent implements OnInit {
     if (this.isAdmin) {
       let gender;
       let blocks = [];
+
       await this.regService.getUserByUniId(this.roomBookingForm.value.sID).toPromise().then(
         res => {
           if (res['success']) {
-            gender = res['data']['gender'];
+              gender = res['data']['gender'];
+          } else {
+            this.sweetAlerts.errorAlerts('Invalid Student ID',
+              'No Record Found');
+            return;
           }
         }
       ).catch(
