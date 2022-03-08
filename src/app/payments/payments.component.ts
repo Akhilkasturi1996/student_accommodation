@@ -28,6 +28,8 @@ export class PaymentsComponent implements OnInit {
   showTable = false;
   showModel = false;
   submitted = false;
+  phistory = false;
+  historyData = null;
 
   payForm = new FormGroup({
     uniID: new FormControl({value: '', disabled: true}),
@@ -97,6 +99,26 @@ export class PaymentsComponent implements OnInit {
 
   getStudentPaymentData(stdID: string) {
     this.showloading = true;
+
+    this.paymentService.getStudentPayment(stdID).subscribe(
+      res => {
+        if (res['success']) {
+          this.historyData = res['data'];
+          if (this.historyData.length > 0) {
+            console.log(this.historyData);
+            this.historyData.sort((a, b) => (a.paymentID < b.paymentID) ? 1 : ((b.paymentID > a.paymentID) ? -1 : 0));
+            this.phistory = true;
+          } else {
+            this.phistory = false;
+            this.sweetAlerts.errorAlerts('Records Not Found', 'No Payments Records Found');
+          }
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+
     this.paymentService.getPaymentByUniId(stdID).subscribe(
       res => {
         if (res['success']) {
@@ -106,7 +128,7 @@ export class PaymentsComponent implements OnInit {
             this.showloading = false;
           } else {
             this.showloading = false;
-            this.sweetAlerts.errorAlerts('Records Not Found', 'No Payments Records Found');
+            this.showTable = false;
           }
         }
       },
@@ -142,7 +164,7 @@ export class PaymentsComponent implements OnInit {
       payAmount: Number(this.payForm.value.payAmount)
     };
 
-    if(this.payForm.invalid){
+    if (this.payForm.invalid) {
       return;
     }
 
@@ -164,9 +186,9 @@ export class PaymentsComponent implements OnInit {
       confirmButtonText: 'Yes, pay it!'
     }).then((result) => {
       if (result.isConfirmed) {
-         this.paymentService.payDueAmount(userDetails).toPromise().then(res => {
+        this.paymentService.payDueAmount(userDetails).toPromise().then(res => {
             if (res['success']) {
-              this.showModel =  false;
+              this.showModel = false;
               this.getStudentPaymentData(userDetails.uniID);
               Swal.fire(
                 'Paid!',
@@ -175,9 +197,9 @@ export class PaymentsComponent implements OnInit {
               );
             }
           }
-          ).catch(error => {
-           console.log(error);
-         });
+        ).catch(error => {
+          console.log(error);
+        });
       }
     });
   }

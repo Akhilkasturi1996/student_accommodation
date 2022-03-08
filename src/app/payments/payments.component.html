@@ -167,6 +167,33 @@
         </div>
       </form>
 
+      <form *ngIf="phistory">
+        <h2>Payment History</h2>
+        <div class="row table-div pr-2">
+          <table class="table mt-4 ml-4">
+            <thead>
+            <tr>
+              <th>No.</th>
+              <th>Booking ID</th>
+              <th>Total To Be Paid</th>
+              <th>Paid Amount</th>
+              <th>Due Amount</th>
+              <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let u of historyData | slice:0:10;let j=index">
+              <td>{{j + 1}}</td>
+              <td>{{u.bookingID}}</td>
+              <td>{{u.payAmount + u.dueAmount}}</td>
+              <td>{{u.payAmount}}</td>
+              <td>{{u.dueAmount }}</td>
+              <td>{{u.date | date: 'yyyy-MM-dd'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
 
     </div>
   </div>
