@@ -5,14 +5,17 @@
 
       <form [formGroup]="shistoryForm">
         <div *ngIf="isAdmin" class="row mt-4">
-          <div class="col-sm-3">
+          <div class="col-sm-2">
             <label>Student ID</label>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-5">
             <input formControlName="stdId" class="form-control">
           </div>
-          <div class="col-sm-2 ml-3">
+          <div class="col-sm-2">
             <button (click)="getStudentId()" type="button" class="btn btn-primary" >Search</button>
+          </div>
+          <div class="col-sm-3">
+            <button (click)="showcurrentHistroy()" type="button" class="btn btn-warning" >View Current History</button>
           </div>
         </div>
 
@@ -42,6 +45,31 @@
             </tbody>
           </table>
         </div>
+
+      <div *ngIf="currenthistory" class="row table-div pr-2">
+        <h2>Today : {{today1 }}</h2>
+        <table class="table mt-4 ml-4">
+          <thead>
+          <tr>
+            <th>No.</th>
+            <th>Student ID</th>
+            <th>Room No.</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let sh of currenTemptHistory;let j=index">
+            <td>{{j + 1}}</td>
+            <td>{{sh.uniID}}</td>
+            <td>{{sh.roomNo}}</td>
+            <td>{{sh.startDate | date:'yyyy-MM-dd' }}</td>
+            <td>{{sh.endDate  | date:'yyyy-MM-dd' }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
       </form>
 
     </div>
