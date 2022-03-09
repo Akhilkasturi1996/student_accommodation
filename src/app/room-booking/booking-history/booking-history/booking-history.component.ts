@@ -54,14 +54,8 @@ export class BookingHistoryComponent implements OnInit {
         if (res['success']) {
           if (res['data'].length > 0) {
             this.currentHistory = res['data'];
-            console.log(this.currenthistory);
             this.currentHistory.forEach(e => {
-              if (e.endDate > this.today1) {
-                console.log(e);
-              }
-
               if (e.endDate >= this.today1 && e.status !== 'rejected') {
-                console.log(e);
                 this.currenTemptHistory.push(e);
               }
             });
@@ -88,7 +82,6 @@ export class BookingHistoryComponent implements OnInit {
       this.sweetAlerts.errorAlerts('No Value Found','Please Provide Student ID');
       return;
     }
-    console.log(this.studentId);
     this.getBookingsByStudentID();
   }
 
