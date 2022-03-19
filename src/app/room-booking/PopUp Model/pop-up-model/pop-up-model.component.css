@@ -1,0 +1,20 @@
+.container{
+
+}
+form, .selected-date,table{
+  font-size: large;
+  font-weight: 500;
+}
+
+.table-div{
+  overflow-x: auto;
+}
+
+.model{
+  margin-top: 2%;
+  position: absolute;
+  max-width: 100vh;
+  width: 80%;
+  /*min-width: 60vh;*/
+  z-index: 1;
+}

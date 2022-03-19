@@ -1,0 +1,134 @@
+<div class="container-fluid page">
+  <div class="d-flex page__box p-3 mt-2 dash">ADD NEW BOOKING</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div class="col-md-12">
+      <div class="x_title">
+      </div>
+      <div class="x_content">
+        <form class="mt-3" [formGroup]="roomBookingForm">
+
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <label>Start Date</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="date" class="form-control" formControlName="startDate"
+                     [ngClass]="{'is-invalid': submitted && r.startDate.errors}">
+              <div *ngIf="r.startDate.errors" class="invalid-feedback mt-2">
+                <div *ngIf="r.startDate.errors.required">
+                  Please Select a Starting Date.
+                </div>
+                <div *ngIf="r.startDate.errors.smallDate">
+                  Please Select a Larger Date than Today.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <label>End Date</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="date" class="form-control" formControlName="endDate"
+                     [ngClass]="{'is-invalid': submitted && r.endDate.errors}"/>
+              <div *ngIf="r.endDate.errors" class="invalid-feedback mt-2">
+                <div *ngIf="r.endDate.errors.required">
+                  Please Select a End Date.
+                </div>
+                <div *ngIf="r.endDate.errors.notLarge">
+                  Please Select a Valid Date Range.
+                </div>
+                <div *ngIf="r.endDate.errors.smallDate">
+                  Please Select a Larger Date than Today.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="isAdmin" class="row mb-2">
+            <div class="col-sm-6">
+              <label>Student Number</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="sid" value="" id="sid" formControlName="sID"
+                     [ngClass]="{'is-invalid': submitted && r.sID.errors}"/>
+              <div *ngIf="r.sID.errors" class="invalid-feedback mt-2">
+                <div *ngIf="r.sID.errors.required">
+                  Please Enter a Student ID
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!isAdmin" class="row mb-2">
+            <div class="col-sm-6">
+              <label>Block</label>
+            </div>
+
+            <div class="col-sm-6">
+              <select class="form-control" formControlName="blockID"
+                      [ngClass]="{'is-invalid': submitted && r.blockID.errors}">
+                <option value="">Please Select</option>
+                <option *ngFor="let block of blockId"
+                        value="{{block.blockID}}">{{block.blockNO + ' - ' + block.blockName}}</option>
+              </select>
+            </div>
+          </div>
+
+          <!--      <div class="row mb-2">-->
+          <!--        <div class="col-sm-6">-->
+          <!--          <label>Room No</label>-->
+          <!--        </div>-->
+
+          <!--        <div class="col-sm-6">-->
+          <!--          <select class="form-control" name="room" id="txtHint" formControlName="RoomNo">-->
+          <!--            <option value="">Please Select</option>-->
+          <!--            <option value="">2</option>-->
+          <!--          </select>-->
+          <!--        </div>-->
+          <!--      </div>-->
+
+          <div class="row mb-3">
+            <div class="col-sm-8">
+
+            </div>
+
+            <div class="col-sm-4">
+              <input type="submit" (click)="onSubmit()" class="form-control btn btn-primary" name="request" value="Submit"/>
+            </div>
+          </div>
+        </form>
+        <!--    *ngIf="!showTable"-->
+        <div *ngIf="showTable" class="row table-div">
+          <table class="table mt-4 ml-4">
+            <thead>
+            <tr>
+              <th>No.</th>
+              <th>Block Name</th>
+              <th>Room No.</th>
+              <th>Pay Amount</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let room of rooms;let j=index">
+              <th>{{j + 1}}</th>
+              <td>{{room['blockName']}}</td>
+              <td>{{room['roomNo']}}</td>
+              <td>${{payment}}</td>
+              <td>
+                <button (click)="ConfirmWithSureMessage(room.roomID)" type="button" class="btn btn-warning">Book</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+    </div>
+  </div>

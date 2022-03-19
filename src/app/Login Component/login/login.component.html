@@ -1,0 +1,57 @@
+<div class="back-color">
+  <img class="wave" src="https://std-acc.s3.amazonaws.com/assets/login_cover.jpg">
+  <div class="container">
+    <div class="img">
+      <img src="https://std-acc.s3.amazonaws.com/assets/login_bg.svg">
+    </div>
+    <div class="login-content">
+
+      <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()" novalidate>
+        <img src="assets/avatar.svg">
+        <h2 class="title">Welcome</h2>
+        <div class="input-div one">
+
+          <div class="i">
+            <img src="assets/person-circle.svg" height="30px" width="30px" style="opacity: 50%">
+          </div>
+
+          <div class="div">
+            <input placeholder="University ID" type="text" class="form-control input" formControlName="uname" name="username"
+            required>
+          </div>
+        </div>
+
+        <mat-error *ngIf="(l.uname.touched || submitted) && l.uname.errors?.required ">
+          Username ID is Required
+        </mat-error>
+
+        <div class="input-div pass">
+          <div class="i">
+            <img src="assets/lock-fill.svg" height="30px" width="30px" style="opacity: 50%">
+          </div>
+
+          <div class="form-group">
+            <input placeholder="Password" type="password" class="form-control input" formControlName="pword"
+                   required>
+        </div>
+        </div>
+
+        <mat-error *ngIf="(l.pword.touched || submitted) && l.pword.errors?.required">
+          Password is Required
+        </mat-error>
+
+        <mat-error *ngIf="signInFalse">
+          {{signInError}}
+        </mat-error>
+
+        <a href="#">Forgot Password?</a>
+        <button type="submit" class="btn">Login</button>
+
+
+
+        <a style="text-align: center;color: #0a478b;margin-top: 3em" routerLink="/signup"><b>Sign Up</b></a>
+      </form>
+
+    </div>
+  </div>
+</div>

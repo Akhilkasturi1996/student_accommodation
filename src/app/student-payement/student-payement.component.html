@@ -1,0 +1,54 @@
+<div class="container-fluid px-0">
+  <div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2 dash">User Accounts</div>
+    <div class="page__content shadow p-3 position-relative">
+
+      <div *ngIf="hasLatePayment" class="alert alert-danger notification" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h2 class="alert-heading">Please Pay The Due Payment!</h2>
+        Details of Due Amount
+        <hr>
+        <div *ngFor="let p of latePayments" class="row">
+          <div class="col-sm-2">Booking ID: {{p.bookingID}}</div>
+          <div class="col-sm-2">Room ID: {{p.roomID}}</div>
+          <div class="col-sm-3">Due Amount: {{p.dueAmount}}</div>
+          <div class="col-sm-2">Due Days: {{p.DateDiff}}</div>
+          <div class="col-sm-3">Booked Date: {{p.startDate | date: 'yyyy-MM-dd'}}</div>
+          <div class="col-sm-3"></div>
+        </div>
+      </div>
+
+      <form>
+
+        <div class="row table-div pr-2">
+          <table class="table mt-4 ml-4">
+            <thead>
+            <tr>
+              <th>No.</th>
+              <th>Booking ID</th>
+              <th>Total To Be Paid</th>
+              <th>Paid Amount</th>
+              <th>Due Amount</th>
+              <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let u of userData;let j=index">
+              <td>{{j + 1}}</td>
+              <td>{{u.bookingID}}</td>
+              <td>{{u.payAmount + u.dueAmount}}</td>
+              <td>{{u.payAmount}}</td>
+              <td>{{u.dueAmount }}</td>
+              <td>{{u.date | date: 'yyyy-MM-dd'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+      <mat-spinner *ngIf="showloading" color="primary" ></mat-spinner>
+
+    </div>
+  </div>
+</div>

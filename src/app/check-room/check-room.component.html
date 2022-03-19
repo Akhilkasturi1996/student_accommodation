@@ -1,0 +1,131 @@
+<div class="container-fluid px-0">
+  <div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2 dash">Check Availability</div>
+    <div class="page__content shadow p-3 position-relative">
+
+      <form [formGroup]="checkRoomForm" class="py-2">
+        <div class="row">
+          <div class="col-sm-6 pt-1 pl-3">
+            <label>Starting Date:</label>
+          </div>
+          <div class="col-sm-6">
+            <input type="date" class="form-control" formControlName="startDate"
+                   [ngClass]="{'is-invalid': submitted && c.startDate.errors}">
+            <div *ngIf="c.startDate.errors" class="invalid-feedback mt-2">
+              <div *ngIf="c.startDate.errors.required">
+                Please Select a Starting Date.
+              </div>
+              <div *ngIf="c.endDate.errors.notLarge">
+                Please Select a Valid Date Range.
+              </div>
+              <div *ngIf="c.endDate.errors.smallDate">
+                Please Select a Larger Date than Today.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-sm-6 pt-1 pl-3">
+            <label>Ending Date:</label>
+          </div>
+          <div class="col-sm-6">
+            <input type="date" class="form-control" formControlName="endDate"
+                   [ngClass]="{'is-invalid': submitted && c.endDate.errors}"/>
+            <div *ngIf="c.endDate.errors" class="invalid-feedback mt-2">
+              <div *ngIf="c.endDate.errors.required">
+                Please Select a End Date.
+              </div>
+              <div *ngIf="c.endDate.errors.notLarge">
+                Please Select a Valid Date Range.
+              </div>
+              <div *ngIf="c.endDate.errors.smallDate">
+                Please Select a Larger Date than Today.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="isAdmin" class="row mt-3">
+          <div class="col-sm-6 pt-1 pl-3">
+            <label>Student Type:</label>
+          </div>
+          <div class="col-sm-6">
+            <select (change)="getBlockByGenderIdforAdmin($event.target)"  class="form-control">
+              <option value="1">Male</option>
+              <option value="2">Female</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-sm-6 pt-1 pl-3">
+            <label>Block ID:</label>
+          </div>
+          <div class="col-sm-6">
+            <select class="form-control" formControlName="blockID"
+                    [ngClass]="{'is-invalid': submitted && c.blockID.errors}">
+              <option value="">Please Select</option>
+              <option *ngFor="let block of blockId"
+                      value="{{block.blockID}}">{{block.blockNO + ' - ' + block.blockName}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-sm-9">
+          </div>
+          <div class="col-sm-3 pl-2">
+            <button (click)="submit()" type="button" class="form-control btn btn-primary">Search</button>
+          </div>
+        </div>
+      </form>
+
+      <br>
+
+      <div class="row selected-date" *ngIf="showTable">
+        <div class="col-sm-6 pt-1 pl-3">
+          From :{{c.startDate.value}}
+        </div>
+        <div class="col-sm-6 pt-1 pl-3">
+          To: {{c.endDate.value}}
+        </div>
+
+      </div>
+      <br>
+
+      <div class="row table-div">
+        <table *ngIf="showTable" class="table mt-4 ml-4">
+          <thead>
+          <tr>
+            <th>No.</th>
+            <th>Block ID</th>
+            <th>Room No.</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let i of rooms;let j=index">
+            <th>{{j + 1}}</th>
+            <td>{{i["blockName"]}}</td>
+            <td>{{i['roomNo']}}</td>
+          </tr>
+          </tbody>
+
+          <!--          <nav class="col-sm-4" aria-label="Page navigation example pt-2">-->
+          <!--            <ul class="pagination">-->
+          <!--              <li class="page-item"><a class="page-link" href="#">Previous</a></li>-->
+          <!--              <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+          <!--              <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+          <!--              <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+          <!--              <li class="page-item"><a class="page-link" href="#">Next</a></li>-->
+          <!--            </ul>-->
+          <!--          </nav>-->
+
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

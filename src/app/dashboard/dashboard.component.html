@@ -1,0 +1,75 @@
+<div class="container-fluid page">
+  <div class="d-flex page__box p-3 mt-2 dash">Dashboard</div>
+  <div class="page__content shadow p-3 position-relative">
+<!--    <div class="page__content-data position-absolute ">-->
+
+    <div class="main-container">
+
+      <div class="heading">
+        <h1 class="heading__title">Summary</h1>
+      </div>
+
+      <div class="cards">
+
+        <div  *ngIf="isAdmin"  class="card card-1">
+          <h2 class="card__title">Total Booking Today</h2>
+          <p class="card__apply">
+            <a class="card__link">{{totalBooking}}<i class="fas fa-arrow-right"></i></a>
+          </p>
+        </div>
+
+        <div *ngIf="isAdmin" class="card card-2">
+          <h2 class="card__title">Booking Requests</h2>
+          <p class="card__apply">
+            <a class="card__link" >{{totalBookingRequest}}<i class="fas fa-arrow-right"></i></a>
+          </p>
+        </div>
+
+        <div *ngIf="isAdmin" class="card card-3">
+          <h2 class="card__title">Payment</h2>
+          <p class="card__apply">
+            <a class="card__link" routerLink="/payment">Update <i class="fas fa-arrow-right"></i></a>
+          </p>
+        </div>
+        <div *ngIf="!isAdmin" class="card card-3">
+          <h2 class="card__title">Payment</h2>
+          <p class="card__apply">
+            <a class="card__link" routerLink="/student-payment">View Payment Details <i class="fas fa-arrow-right"></i></a>
+          </p>
+        </div>
+
+        <div class="card card-7">
+          <h2 class="card__title">New Booking</h2>
+          <p class="card__apply">
+            <a class="card__link" routerLink="/newBooking">Requset New Booking <i class="fas fa-arrow-right"></i></a>
+          </p>
+        </div>
+
+        <div *ngIf="!isAdmin" class="card card-4">
+          <h2 class="card__title">Check Availability</h2>
+          <p class="card__apply">
+            <a class="card__link" routerLink="/checkAvailability">Click to Check<i class="fas fa-arrow-right"></i></a>
+          </p>
+        </div>
+
+        <div *ngIf="isAdmin" class="card card-5">
+          <h2 class="card__title">Room Updates</h2>
+          <p class="card__apply">
+            <a class="card__link" routerLink="/inventory">Update Now <i class="fas fa-arrow-right"></i></a>
+          </p>
+        </div>
+
+        <div class="card card-4">
+          <h2 class="card__title">Available Rooms Today</h2>
+          <p class="card__apply">
+            <a class="card__link" >{{availableRoomCount}} <i class="fas fa-arrow-right"></i></a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+
+<!--    </div>-->
+  </div>
+</div>

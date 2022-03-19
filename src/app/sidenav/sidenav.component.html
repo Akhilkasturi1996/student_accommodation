@@ -1,0 +1,75 @@
+<mat-nav-list>
+  <div class="logo py-2">
+<!--    <img src="./assets/logo.png" alt="Company Logo" />-->
+  </div>
+  <mat-divider></mat-divider>
+<!--  <h2 matSubheader class="mt-2">APPLICATIONS</h2>-->
+<br>
+<!--  <a mat-list-item routerLinkActive="list-item-active"-->
+<!--     (click)="clickMenuItem('home')" routerLink="/home">-->
+<!--    <mat-icon>home</mat-icon> <span *ngIf="showText">Home</span>-->
+<!--  </a>-->
+
+  <a mat-list-item routerLinkActive="list-item-active"
+     (click)="clickMenuItem('dashboard')" routerLink="/dashboard">
+    <mat-icon>dashboard</mat-icon> <span *ngIf="showText"> Dashboard </span>
+  </a>
+
+
+  <a mat-list-item routerLinkActive="list-item-active"  (click)="clickMenuItem('booking')">
+    <mat-icon>booking</mat-icon> <span *ngIf="showText"> Booking </span>
+  </a>
+
+  <div class="sub-menus">
+    <a *ngIf="'booking'===submenu" mat-list-item routerLinkActive="list-item-active" routerLink="/newBooking">
+      <mat-icon>bookmark_add</mat-icon> <span *ngIf="showText"> New Booking </span>
+    </a>
+
+    <a *ngIf="'booking'===submenu" mat-list-item routerLinkActive="list-item-active" routerLink="/booking-history">
+      <mat-icon>dvr</mat-icon> <span *ngIf="showText"> Booking History </span>
+    </a>
+
+    <div *ngIf="isAdmin">
+      <a *ngIf="'booking'===submenu" mat-list-item routerLinkActive="list-item-active" routerLink="/booking-confirm">
+        <mat-icon>recommend</mat-icon> <span *ngIf="showText"> Booking Confirmation </span>
+      </a>
+    </div>
+  </div>
+
+  <a mat-list-item routerLinkActive="list-item-active"
+     (click)="clickMenuItem('check')" routerLink="/checkAvailability">
+    <mat-icon>check</mat-icon><span *ngIf="showText"> Check Availability </span>
+  </a>
+
+  <a *ngIf="isAdmin" mat-list-item routerLinkActive="list-item-active"  (click)="clickMenuItem('user')">
+    <mat-icon>people_alt</mat-icon> <span *ngIf="showText"> Users </span>
+  </a>
+
+  <div class="sub-menus">
+    <a *ngIf="'user'===submenu" mat-list-item routerLinkActive="list-item-active" routerLink="/user-account-update">
+      <mat-icon>settings_accessibility</mat-icon> <span *ngIf="showText"> User Profile </span>
+    </a>
+
+    <a *ngIf="'user'===submenu" mat-list-item routerLinkActive="list-item-active" routerLink="/user-account-activate">
+      <mat-icon>person_add</mat-icon> <span *ngIf="showText"> User Accounts </span>
+    </a>
+  </div>
+
+
+  <a *ngIf="!isAdmin" mat-list-item routerLinkActive="list-item-active"
+     (click)="clickMenuItem('payment')" routerLink="/student-payment">
+    <mat-icon>payment</mat-icon> <span *ngIf="showText"> Payment </span>
+  </a>
+
+  <a *ngIf="isAdmin" mat-list-item routerLinkActive="list-item-active"
+     (click)="clickMenuItem('payment')" routerLink="/payment">
+    <mat-icon>payment</mat-icon> <span *ngIf="showText"> Payment </span>
+  </a>
+
+  <a *ngIf="isAdmin" mat-list-item routerLinkActive="list-item-active"
+     (click)="clickMenuItem('payment')" routerLink="/inventory">
+    <mat-icon>inventory</mat-icon> <span *ngIf="showText"> Inventory </span>
+  </a>
+
+
+</mat-nav-list>

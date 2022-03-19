@@ -1,0 +1,16 @@
+@import "../home/home.component.css";
+
+.dash{
+  background: radial-gradient(#1fe4f5, #3fbafe);
+  font-weight: 500;
+}
+
+
+form, .selected-date,table{
+  font-size: large;
+  font-weight: 500;
+}
+
+.table-div{
+  overflow-x: auto;
+}

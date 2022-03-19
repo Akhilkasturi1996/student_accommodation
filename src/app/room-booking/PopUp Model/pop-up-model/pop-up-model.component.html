@@ -1,0 +1,144 @@
+<!-- Button trigger modal -->
+<div class="row mb-3">
+  <div class="col-sm-8">
+
+  </div>
+  <div class="col-sm-2 mt-2">
+    <button (click)="toggle()" type="button" class="btn btn-primary">
+      <span> + </span> Add New Block</button>
+  </div>
+  <div class="col-sm-2 mt-2">
+    <button (click)="toggleRoomCreate()" type="button" class="btn btn-warning">
+      <span> + </span> Add New Room</button>
+  </div>
+</div>
+
+<div class="container">
+<!-- Modal -->
+  <div class="model" *ngIf="blockHidden">
+    <div class="model-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="staticBackdropLabel">Create New Block</h1>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="BlockForm">
+
+            <div class="row">
+              <div class="col-sm-6">
+                <label>Block No</label>
+              </div>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" formControlName="blockNo"
+                       [ngClass]="{'is-invalid': submitted && b.blockNo.errors}">
+                <div *ngIf="b.blockNo.errors" class="invalid-feedback mt-2">
+                  <div *ngIf="b.blockNo.errors.required">
+                    Please Enter a Block Number
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row  mt-2">
+              <div class="col-sm-6">
+                <label>Block Name</label>
+              </div>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" formControlName="blockName"
+                       [ngClass]="{'is-invalid': submitted && b.blockName.errors}"/>
+                <div *ngIf="b.blockName.errors" class="invalid-feedback mt-2">
+                  <div *ngIf="b.blockName.errors.required">
+                    Please Enter a Block Name
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row  mt-2">
+              <div class="col-sm-6">
+                <label>Block Type</label>
+              </div>
+              <div class="col-sm-6">
+                <select type="text" class="form-control" formControlName="genderType">
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button (click)="toggle()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button *ngIf="!isUpdate" (click)="sendCreateBlockData()" type="button" class="btn btn-success">Create</button>
+          <button *ngIf="isUpdate" (click)="updateBlockData()" type="button" class="btn btn-warning">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <!-- Modal -->
+  <div class="model" *ngIf="roomHidden">
+    <div class="model-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="staticBackdropLabel">Create New Room</h1>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="RoomForm">
+
+            <div class="row">
+              <div class="col-sm-6">
+                <label>Room No</label>
+              </div>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" formControlName="roomNo"
+                       [ngClass]="{'is-invalid': submitted && r.roomNo.errors}">
+                <div *ngIf="r.roomNo.errors" class="invalid-feedback mt-2">
+                  <div *ngIf="r.roomNo.errors.required">
+                    Please Enter a Room Number
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row  mt-2">
+              <div class="col-sm-6">
+                <label>Block Name</label>
+              </div>
+              <div class="col-sm-6">
+                <select type="text" class="form-control" formControlName="blockID"
+                        [ngClass]="{'is-invalid': submitted && r.roomNo.errors}">
+                  <option value="">Please Select</option>
+                  <option *ngFor="let b of tempBlock" value="{{b.blockID}}">{{b.blockNO}} - {{b.blockName}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row  mt-2">
+              <div class="col-sm-6">
+                <label>Room Status</label>
+              </div>
+              <div class="col-sm-6">
+                <select type="text" class="form-control" formControlName="status"
+                        [ngClass]="{'is-invalid': submitted && r.status.errors}">
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button (click)="toggleRoomCreate()" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button *ngIf="!isUpdate" (click)="sendCreateRoomData()" type="button" class="btn btn-success">Create</button>
+          <button *ngIf="isUpdate" (click)="updateRoomData()" type="button" class="btn btn-warning">update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

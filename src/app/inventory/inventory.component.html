@@ -1,0 +1,99 @@
+<div class="container-fluid px-0">
+  <div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2 dash">Inventory</div>
+    <div class="page__content shadow p-3 position-relative">
+
+
+
+      <app-pop-up-model (popUpItemEvent)="createBlock($event)" (popUpRoomDataEvent)="createRoom($event)"
+      (popUpUpdateRoomEvent)="updateRooms($event)"
+      (popUpUpdateBlockEvent)="updateBlock($event)"></app-pop-up-model>
+      <div>Room Details</div>
+
+      <div class="row mt-4">
+        <div class="col-sm-4">
+          <label>Search Block Name</label>
+        </div>
+        <div class="col-sm-8">
+          <input (keyup)="filterTableData($event.target)" class="form-control">
+        </div>
+      </div>
+
+      <div class="row table-div pr-2">
+        <table class="table mt-4 ml-4">
+          <thead>
+          <tr>
+            <th>No.</th>
+            <th>Block Name</th>
+            <th>Room No.</th>
+            <th>Status</th>
+            <th colspan="2">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let room of tempRoom;let j=index">
+            <td>{{j + 1}}</td>
+            <td>{{room['blockName']}}</td>
+            <td>{{room['roomNo']}}</td>
+            <td>{{room['status'] | uppercase}}</td>
+            <td>
+              <button (click)="updateRoom(room)" type="button" class="btn btn-warning">Update</button>
+            </td>
+            <td>
+              <button (click)="deleteRoom(room.roomID)" type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <br>
+
+      <div>Block Details</div>
+
+      <div class="row mt-4">
+        <div class="col-sm-4">
+          <label>Search Block Name</label>
+        </div>
+        <div class="col-sm-8">
+          <input class="form-control" (keyup)="filterBlockTableData($event.target)">
+        </div>
+      </div>
+
+      <div class="row table-div pr-2">
+        <table class="table mt-4 ml-4">
+          <thead>
+          <tr>
+            <th>No.</th>
+            <th>Block Name</th>
+            <th>Block No.</th>
+            <th>Gender Type</th>
+            <th colspan="2">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let block of tempBlock;let j=index">
+            <th>{{j + 1}}</th>
+            <td>{{block['blockName']}}</td>
+            <td>{{block['blockNO']}}</td>
+            <td>{{block['genderType'].toUpperCase()}}</td>
+            <td>
+              <button (click)="callUpdateBlock(block)" type="button" class="btn btn-warning">Update</button>
+            </td>
+            <td>
+              <button (click)="deleteBlock(block.blockID)" type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
